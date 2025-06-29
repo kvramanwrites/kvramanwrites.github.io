@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K.V. Raman - The Trilogy</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased">
+    <!-- Header/Navigation Bar -->
+    <header class="bg-transparent py-4 border-b border-gray-800">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-gradient">K V RAMAN</div>
+            <nav class="hidden md:flex space-x-6">
+                <a href="index.html" class="text-gradient hover:text-[#f9e7bc] transition duration-300">HOME</a>
+                <a href="about.html" class="text-gradient hover:text-[#f9e7bc] transition duration-300">ABOUT</a>
+                <a href="trilogy.html" class="text-gradient hover:text-[#f9e7bc] transition duration-300">THE TRILOGY</a>
+                <a href="#" class="text-gradient hover:text-[#f9e7bc] transition duration-300">DOSSIERS</a>
+                <a href="#" class="text-gradient hover:text-[#f9e7bc] transition duration-300">MEDIA</a>
+                <a href="#" class="text-gradient hover:text-[#f9e7bc] transition duration-300">CONTACT</a>
+            </nav>
+            <!-- Mobile Menu Button (Hamburger) -->
+            <button id="mobile-menu-button" class="md:hidden text-gradient hover:text-[#f9e7bc] focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-gray-900 bg-opacity-95 z-50 flex flex-col items-center justify-center space-y-8">
+            <button id="close-mobile-menu" class="absolute top-4 right-4 text-gradient hover:text-[#f9e7bc] focus:outline-none">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <a href="index.html" class="text-gradient hover:text-[#f9e7bc] text-3xl transition duration-300">HOME</a>
+            <a href="about.html" class="text-gradient hover:text-[#f9e7bc] text-3xl transition duration-300">ABOUT</a>
+            <a href="trilogy.html" class="text-gradient hover:text-[#f9e7bc] text-3xl transition duration-300">THE TRILOGY</a>
+            <a href="#" class="text-gradient hover:text-[#f9e7bc] text-3xl transition duration-300">DOSSIERS</a>
+            <a href="#" class="text-gradient hover:text-[#f9e7bc] text-3xl transition duration-300">MEDIA</a>
+            <a href="#" class="text-gradient hover:text-[#f9e7bc] text-3xl transition duration-300">CONTACT</a>
+        </div>
+    </header>
+
+    <!-- Trilogy Section -->
+    <section class="container mx-auto px-4 py-20 text-center">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gradient mb-8">
+            THE GENOME PROJECT TRILOGY
+        </h1>
+        <p class="text-xl sm:text-2xl text-gradient mb-12 max-w-4xl mx-auto">
+            Dive deep into a world where science, conspiracy, and destiny collide. K.V. Raman's critically acclaimed trilogy explores the cutting edge of genetic manipulation and artificial intelligence, pushing the boundaries of what it means to be human.
+        </p>
+
+        <!-- Book 1: The Whisper Protocol -->
+        <div class="card flex flex-col md:flex-row items-center md:items-start text-center md:text-left p-6 mb-12">
+            <img src="whisper_protocol_cover.png" alt="The Whisper Protocol cover" class="rounded-lg w-full max-w-[200px] h-auto object-cover md:mr-8 mb-6 md:mb-0">
+            <div class="flex-grow">
+                <h2 class="text-3xl font-semibold mb-4 text-gradient">BOOK I: THE WHISPER PROTOCOL</h2>
+                <p class="text-gray-300 text-lg mb-4">
+                    A cryptic signal. A genetic fiddle. A race against time to unlock a shadowy government secret that could rewrite the very fabric of humanity. Join Dr. Anya Sharma as she uncovers a conspiracy that threatens to unravel the world's most guarded scientific breakthroughs, revealing truths that were never meant to see the light of day.
+                </p>
+                <p class="text-gray-400 text-base italic mb-4">
+                    "A thrilling debut that combines intricate scientific detail with heart-pounding suspense." - Science Fiction Review
+                </p>
+                <button class="btn-secondary text-base px-8 py-3">READ MORE / BUY NOW</button>
+            </div>
+        </div>
+
+        <!-- Book 2: Kaal Netra Rising -->
+        <div class="card flex flex-col md:flex-row-reverse items-center md:items-start text-center md:text-right p-6 mb-12">
+            <img src="kaalnetra_cover.png" alt="Kaal Netra Rising cover" class="rounded-lg w-full max-w-[200px] h-auto object-cover md:ml-8 mb-6 md:mb-0">
+            <div class="flex-grow">
+                <h2 class="text-3xl font-semibold mb-4 text-gradient">BOOK II: KAAL NETRA RISING</h2>
+                <p class="text-gray-300 text-lg mb-4">
+                    A rogue AI. A divided nation. The search for a weapon that could rewrite the course of history. As the world grapples with the aftermath of the Whisper Protocol, an advanced artificial intelligence, "Kaal Netra," emerges, threatening global stability. Old alliances crumble, and new heroes must rise to confront a power unlike any seen before.
+                </p>
+                <p class="text-gray-400 text-base italic mb-4">
+                    "An explosive sequel that builds brilliantly on its predecessor, delivering twists and turns at every chapter." - Futuristic Reads
+                </p>
+                <button class="btn-secondary text-base px-8 py-3">READ MORE / BUY NOW</button>
+            </div>
+        </div>
+
+        <!-- Book 3: Book III Coming Soon -->
+        <div class="card flex flex-col md:flex-row items-center md:items-start text-center md:text-left p-6 mb-12">
+            <img src="https://placehold.co/200x300/1a202c/e2e8f0?text=BOOK+III+COMING+SOON" alt="Book III Coming Soon cover" class="rounded-lg w-full max-w-[200px] h-auto object-cover md:mr-8 mb-6 md:mb-0">
+            <div class="flex-grow">
+                <h2 class="text-3xl font-semibold mb-4 text-gradient">BOOK III: [TITLE TO BE REVEALED]</h2>
+                <p class="text-gray-300 text-lg mb-4">
+                    The epic conclusion to The Genome Project Trilogy. A gripping, high-stakes journey where science and intrigue collide. Learn the truth in 2025. This final installment promises to tie together all the loose ends, delivering a powerful and unforgettable resolution to the saga.
+                </p>
+                <p class="text-gray-400 text-base italic mb-4">
+                    "Anticipation is building for the final chapter of this groundbreaking series!" - The Literary Voice
+                </p>
+                <button class="btn-secondary text-base px-8 py-3">STAY TUNED FOR UPDATES</button>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center text-gray-500 text-sm">
+        <div class="container mx-auto px-4">
+            &copy; 2025 K.V. Raman. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for mobile menu toggling
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+        });
+
+        closeMobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
