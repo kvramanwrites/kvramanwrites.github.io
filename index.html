@@ -1,106 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>K V Raman | Genome Project Trilogy</title>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/main.css">
-  <link rel="icon" href="images/favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K.V. Raman - The Genome Project Trilogy</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <header class="site-header">
-    <div class="logo">K V RAMAN</div>
-    <nav class="site-nav">
-      <a href="#">Home</a>
-      <a href="#about">About</a>
-      <a href="#trilogy">The Trilogy</a>
-      <a href="#dossiers">Dossiers</a>
-      <a href="#media">Media</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
-  <main>
-    <section class="hero">
-      <div class="hero-bg"></div>
-      <div class="hero-content">
-        <h1>The Genome Project Trilogy</h1>
-        <p class="subtitle">A Sci-Fi Thriller Series by K V Raman</p>
-        <div class="cta-btns">
-          <a class="btn" href="#trilogy">Explore the Books</a>
-          <a class="btn secondary" href="#sample">Read a Free Sample</a>
+<body class="antialiased">
+    <!-- Header/Navigation Bar -->
+    <header class="bg-transparent py-4 border-b border-gray-800">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-gradient">K V RAMAN</div>
+            <nav class="hidden md:flex space-x-6">
+                <a href="#" class="text-gray-300 hover:text-white transition duration-300">HOME</a>
+                <a href="#" class="text-gray-300 hover:text-white transition duration-300">ABOUT</a>
+                <a href="#" class="text-gray-300 hover:text-white transition duration-300">THE TRILOGY</a>
+                <a href="#" class="text-gray-300 hover:text-white transition duration-300">DOSSIERS</a>
+                <a href="#" class="text-gray-300 hover:text-white transition duration-300">MEDIA</a>
+                <a href="#" class="text-gray-300 hover:text-white transition duration-300">CONTACT</a>
+            </nav>
+            <!-- Mobile Menu Button (Hamburger) -->
+            <button id="mobile-menu-button" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
         </div>
-      </div>
-    </section>
-    <section class="books-showcase" id="trilogy">
-      <h2>The Trilogy</h2>
-      <div class="book-cards">
-        <div class="book-card">
-          <img src="images/whisper_protocol_cover.png" alt="The Whisper Protocol Cover">
-          <h3>The Whisper Protocol</h3>
-          <p>A CBI agent faces the world’s most secretive genome project. Conspiracy, espionage, and AI collide.</p>
-          <a class="btn small" href="#">Learn More</a>
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-gray-900 bg-opacity-95 z-50 flex flex-col items-center justify-center space-y-8">
+            <button id="close-mobile-menu" class="absolute top-4 right-4 text-gray-300 hover:text-white focus:outline-none">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <a href="#" class="text-gray-300 hover:text-white text-3xl transition duration-300">HOME</a>
+            <a href="#" class="text-gray-300 hover:text-white text-3xl transition duration-300">ABOUT</a>
+            <a href="#" class="text-gray-300 hover:text-white text-3xl transition duration-300">THE TRILOGY</a>
+            <a href="#" class="text-gray-300 hover:text-white text-3xl transition duration-300">DOSSIERS</a>
+            <a href="#" class="text-gray-300 hover:text-white text-3xl transition duration-300">MEDIA</a>
+            <a href="#" class="text-gray-300 hover:text-white text-3xl transition duration-300">CONTACT</a>
         </div>
-        <div class="book-card">
-          <img src="images/kaalnetra_cover.png" alt="KaalNetra Rising Cover">
-          <h3>KaalNetra Rising</h3>
-          <p>Genome children awaken, alliances fracture, and the shadow of Subject Zero grows.</p>
-          <a class="btn small" href="#">Learn More</a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="text-center py-20 px-4">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gradient mb-4">
+            THE GENOME PROJECT TRILOGY
+        </h1>
+        <p class="text-xl sm:text-2xl text-gray-400 mb-8">
+            A Sci-Fi Thriller Series by K V Raman
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+            <button class="btn-primary">EXPLORE THE BOOKS</button>
+            <button class="btn-secondary">READ A FREE SAMPLE</button>
         </div>
-        <div class="book-card coming-soon">
-          <div class="book-placeholder">Coming 2025</div>
-          <h3>Book III: TBA</h3>
-          <p>Stay tuned for the trilogy’s explosive finale.</p>
+    </section>
+
+    <!-- Book/Dossier Cards Section -->
+    <section class="container mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Card 1: The Whisper Protocol -->
+        <div class="card flex flex-col items-center text-center">
+            <h3 class="text-2xl font-semibold mb-4 text-white">THE<br>WHISPER<br>PROTOCOL</h3>
+            <!-- Placeholder for DNA icon/image -->
+            <img src="https://placehold.co/100x100/1a202c/e2e8f0?text=DNA" alt="DNA icon" class="mb-4 rounded-lg">
+            <p class="text-gray-400 text-sm mb-6">
+                A cryptic signal, a genetic fiddle, and a race against time to unlock a-shadowy government secret...
+            </p>
+            <button class="btn-secondary text-sm px-6 py-2">LEARN MORE</button>
         </div>
-      </div>
-    </section>
-    <section class="about-series" id="about">
-      <h2>About the Series</h2>
-      <p>Dive into a world where genetics, espionage, and artificial intelligence collide. The Genome Project Trilogy unravels a covert war that will decide the future of humanity…</p>
-    </section>
-    <section class="character-dossiers" id="dossiers">
-      <h2>Character Dossiers</h2>
-      <div class="dossier-highlight">
-        <img src="images/agent_rudra_portrait.png" alt="Agent Rudra Chauhan">
-        <div>
-          <h3>Rudra Chauhan</h3>
-          <p>Lead CBI Agent. Relentless, loyal, and haunted by secrets from the past.</p>
-          <a href="#" class="btn small">View All Dossiers</a>
+
+        <!-- Card 2: Kaal Netra Rising -->
+        <div class="card flex flex-col items-center text-center">
+            <h3 class="text-2xl font-semibold mb-4 text-white">KAAL<br>NETRA<br>RISING</h3>
+            <!-- Placeholder for DNA icon/image -->
+            <img src="https://placehold.co/100x100/1a202c/e2e8f0?text=DNA" alt="DNA icon" class="mb-4 rounded-lg">
+            <p class="text-gray-400 text-sm mb-6">
+                A rogue AI, a divided nation, and the search for a weapon that could rewrite the course of...
+            </p>
+            <button class="btn-secondary text-sm px-6 py-2">LEARN MORE</button>
         </div>
-      </div>
+
+        <!-- Card 3: Book III Coming Soon -->
+        <div class="card flex flex-col items-center text-center">
+            <h3 class="text-2xl font-semibold mb-4 text-white">BOOK III<br>COMING SOON</h3>
+            <!-- Placeholder for book icon/image -->
+            <img src="https://placehold.co/100x100/1a202c/e2e8f0?text=Book" alt="Book icon" class="mb-4 rounded-lg">
+            <p class="text-gray-400 text-sm mb-6">
+                A gripping, high-stakes journey where science and intrigue collide. Learn the truth in 2025...
+            </p>
+            <button class="btn-secondary text-sm px-6 py-2">LEARN MORE</button>
+        </div>
+
+        <!-- Card 4: Character Dossiers -->
+        <div class="card flex flex-col items-center text-center">
+            <h3 class="text-2xl font-semibold mb-4 text-white">CHARACTER<br>DOSSIERS</h3>
+            <p class="text-gray-300 text-lg mb-2">Rudra Chauhan</p>
+            <p class="text-gray-300 text-lg mb-6">Sharvani Iyer<br>Antagonists</p>
+            <p class="text-gray-400 text-sm mb-6 italic">
+                "A gripping, high-stakes journey where science and intrigue collide – The Sci-Fi Review."
+            </p>
+            <button class="btn-secondary text-sm px-6 py-2">LEARN MORE</button>
+        </div>
     </section>
-    <section class="reviews" id="media">
-      <h2>Media & Reviews</h2>
-      <div class="review-carousel">
-        <blockquote>
-          “Intelligent, gripping, and terrifyingly plausible.”
-          <cite>— Book Reviewer</cite>
-        </blockquote>
-        <blockquote>
-          “A tour de force in modern Indian science fiction.”
-          <cite>— Literary Magazine</cite>
-        </blockquote>
-      </div>
-      <a class="btn small" href="#">Download Press Kit</a>
-    </section>
-    <section class="newsletter" id="contact">
-      <h2>Stay Updated</h2>
-      <form class="newsletter-form">
-        <input type="text" placeholder="Your Name">
-        <input type="email" placeholder="Your Email">
-        <button type="submit" class="btn">Sign Up</button>
-      </form>
-    </section>
-  </main>
-  <footer class="site-footer">
-    <div class="footer-content">
-      <div>© 2025 K V Raman</div>
-      <div class="footer-links">
-        <a href="#">Goodreads</a>
-        <a href="#">X</a>
-        <a href="#">Instagram</a>
-      </div>
-    </div>
-  </footer>
+
+    <script>
+        // JavaScript for mobile menu toggling
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+        });
+
+        closeMobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
 </body>
 </html>
