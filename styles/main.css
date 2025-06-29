@@ -1,55 +1,44 @@
-
-:root {
-  --black: #12181f;
-  --dark-teal: #0b253a;
-  --gold: #d1b272;
-  --white: #faf7ee;
-  --accent: #1689b1;
-  --shadow: rgba(0,0,0,0.1);
-  --sans: 'Montserrat', 'Segoe UI', Arial, sans-serif;
-}
+/* style.css */
 
 body {
-  margin: 0;
-  background: var(--black);
-  color: var(--white);
-  font-family: var(--sans);
-  font-size: 1.1rem;
-  line-height: 1.6;
+    font-family: 'Inter', sans-serif;
+    background-color: #0d1117; /* Dark background similar to image */
+    color: #e2e8f0; /* Light text color */
 }
-
-/* ... CSS remains same as provided earlier for brevity ... */
-.site-header { background: var(--dark-teal); color: var(--gold); display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 3vw 1rem 3vw; border-bottom: 1px solid var(--gold); }
-.logo { font-size: 2.1rem; letter-spacing: 2px; font-weight: bold; color: var(--gold); }
-.site-nav a { color: var(--white); margin-left: 2rem; text-decoration: none; font-weight: 500; transition: color 0.2s; }
-.site-nav a:hover { color: var(--gold); }
-.hero { position: relative; background: linear-gradient(120deg, var(--dark-teal) 80%, var(--black) 100%); text-align: center; padding: 5rem 2vw 4rem 2vw; min-height: 380px; overflow: hidden; }
-.hero-bg { position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%;; background: url('../images/dna_wave_bg.png') center/cover no-repeat; opacity: 0.13; z-index: 0; pointer-events: none; }
-.hero-content { position: relative; z-index: 1; }
-.hero h1 { font-size: 2.5rem; color: var(--gold); letter-spacing: 1.5px; }
-.hero .subtitle { margin: 0.5rem 0 2rem 0; color: var(--white); font-size: 1.3rem; }
-.cta-btns .btn { background: var(--gold); color: var(--dark-teal); border: none; padding: 0.8em 2em; margin: 0.5em 0.8em; border-radius: 2em; font-size: 1rem; font-weight: 600; text-decoration: none; box-shadow: 0 2px 10px var(--shadow); transition: background 0.2s, color 0.2s; }
-.cta-btns .btn.secondary { background: var(--dark-teal); color: var(--gold); border: 1px solid var(--gold); }
-.cta-btns .btn:hover, .btn.secondary:hover { background: var(--accent); color: var(--white); }
-.books-showcase { padding: 3rem 3vw 1.5rem 3vw; background: var(--black); text-align: center; }
-.books-showcase h2 { color: var(--gold); font-size: 2rem; }
-.book-cards { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; margin-top: 2rem; }
-.book-card { background: var(--dark-teal); border-radius: 1.3rem; box-shadow: 0 6px 32px var(--shadow); padding: 1.4rem 1rem 1.8rem 1rem; width: 250px; text-align: center; color: var(--white); display: flex; flex-direction: column; align-items: center; position: relative; }
-.book-card img { width: 140px; height: 210px; border-radius: 0.8rem; object-fit: cover; box-shadow: 0 2px 10px var(--shadow); margin-bottom: 1rem; background: #333; }
-.book-card h3 { color: var(--gold); font-size: 1.15rem; margin-bottom: 0.4rem; }
-.book-card .btn.small { font-size: 0.95rem; padding: 0.5em 1.2em; margin-top: 1rem; }
-.book-card.coming-soon .book-placeholder { background: #fff2d7; color: var(--dark-teal); font-size: 1.15rem; border-radius: 0.5em; margin: 1em auto; padding: 2em 0; width: 140px; height: 210px; display: flex; align-items: center; justify-content: center; }
-.about-series, .character-dossiers, .reviews, .newsletter { padding: 2.5rem 3vw 1.5rem 3vw; max-width: 900px; margin: 0 auto; }
-.about-series h2, .character-dossiers h2, .reviews h2, .newsletter h2 { color: var(--gold); margin-bottom: 1rem; }
-.dossier-highlight { display: flex; align-items: center; background: var(--dark-teal); border-radius: 1rem; box-shadow: 0 4px 16px var(--shadow); padding: 1.2rem; margin-top: 1rem; }
-.dossier-highlight img { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; margin-right: 1.2rem; background: #333; }
-.review-carousel blockquote { background: var(--black); color: var(--white); border-left: 3px solid var(--gold); margin: 1.2rem 0; padding: 1.1rem 1.5rem; font-style: italic; border-radius: 0.7rem; }
-.review-carousel cite { color: var(--gold); display: block; font-size: 0.95em; margin-top: 0.7em; text-align: right; }
-.newsletter-form { display: flex; gap: 1rem; margin-top: 1.2rem; }
-.newsletter-form input { padding: 0.8em 1em; border-radius: 2em; border: none; background: var(--dark-teal); color: var(--white); font-size: 1rem; outline: none; flex: 1; }
-.newsletter-form button { background: var(--gold); color: var(--dark-teal); border: none; border-radius: 2em; padding: 0.8em 2em; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background 0.2s, color 0.2s; }
-.site-footer { background: var(--dark-teal); color: var(--gold); padding: 1.5rem 3vw; text-align: center; font-size: 1.05rem; margin-top: 2.5rem; border-top: 1px solid var(--gold); }
-.footer-links a { color: var(--white); margin: 0 1.2rem; text-decoration: none; transition: color 0.2s; }
-.footer-links a:hover { color: var(--gold); }
-@media (max-width: 800px) { .book-cards { flex-direction: column; align-items: center; } .dossier-highlight { flex-direction: column; align-items: flex-start; } .dossier-highlight img { margin-bottom: 1rem; margin-right: 0; } .newsletter-form { flex-direction: column; } }
-@media (max-width: 600px) { .site-header, .site-footer, .about-series, .character-dossiers, .reviews, .newsletter { padding-left: 2vw; padding-right: 2vw; } .logo { font-size: 1.2rem; } .hero h1 { font-size: 1.5rem; } .books-showcase h2 { font-size: 1.3rem; } }
+.container {
+    max-width: 1200px;
+}
+.btn-primary {
+    background-color: #2563eb; /* Blue button */
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+.btn-primary:hover {
+    background-color: #1d4ed8;
+}
+.btn-secondary {
+    background-color: #1f2937; /* Darker button */
+    color: #cbd5e1;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid #475569;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+.btn-secondary:hover {
+    background-color: #374151;
+}
+.card {
+    background-color: #1a202c; /* Card background */
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    border: 1px solid #2d3748;
+}
+.text-gradient {
+    background: linear-gradient(to right, #ffffff, #a0aec0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
