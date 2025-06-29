@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>K.V. Raman - The Genome Project Trilogy</title>
+    <title>K.V. Raman - The Trilogy</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -46,66 +46,96 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="text-center py-20 px-4">
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gradient mb-4">
+    <!-- Trilogy Section -->
+    <section class="container mx-auto px-4 py-20 text-center">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gradient mb-8">
             THE GENOME PROJECT TRILOGY
         </h1>
-        <p class="text-xl sm:text-2xl text-gradient mb-8">
-            A Sci-Fi Thriller Series by K V Raman
+        <p class="text-xl sm:text-2xl text-gradient mb-12 max-w-4xl mx-auto">
+            Dive deep into a world where science, conspiracy, and destiny collide. K.V. Raman's critically acclaimed trilogy explores the cutting edge of genetic manipulation and artificial intelligence, pushing the boundaries of what it means to be human.
         </p>
-        <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <button class="btn-primary" onclick="window.location.href='./trilogy.html';">EXPLORE THE BOOKS</button>
-            <button class="btn-secondary" onclick="window.open('../docs/sample.pdf', '_blank');">READ A FREE SAMPLE</button>
+
+        <!-- Book 1: The Whisper Protocol -->
+        <div id="whisper-protocol-section" class="card flex flex-col md:flex-row items-center md:items-start text-center md:text-left p-6 mb-12">
+            <img src="../images/whisper_protocol_cover.png" alt="The Whisper Protocol cover" class="rounded-lg w-full max-w-[200px] h-auto object-cover md:mr-8 mb-6 md:mb-0">
+            <div class="flex-grow">
+                <h2 class="text-3xl font-semibold mb-4 text-gradient">BOOK I: THE WHISPER PROTOCOL</h2>
+                <p class="text-gray-300 text-lg mb-4">
+                    A cryptic signal. A genetic fiddle. A race against time to unlock a shadowy government secret that could rewrite the very fabric of humanity. Join Dr. Anya Sharma as she uncovers a conspiracy that threatens to unravel the world's most guarded scientific breakthroughs, revealing truths that were never meant to see the light of day.
+                </p>
+
+                <button class="btn-secondary text-base px-8 py-3" onclick="window.open('https://www.amazon.in/dp/B0FFSHXNF2', '_blank');">BUY NOW</button>
+            </div>
         </div>
+
+        <!-- Book 2: Kaal Netra Rising -->
+        <div id="kaal-netra-section" class="card flex flex-col md:flex-row-reverse items-center md:items-start text-center md:text-right p-6 mb-12">
+            <img src="../images/kaalnetra_cover.png" alt="Kaal Netra Rising cover" class="rounded-lg w-full max-w-[200px] h-auto object-cover md:ml-8 mb-6 md:mb-0">
+            <div class="flex-grow">
+                <h2 class="text-3xl font-semibold mb-4 text-gradient">BOOK II: KAAL NETRA RISING</h2>
+                <p class="text-gray-300 text-lg mb-4">
+                    A rogue AI. A divided nation. The search for a weapon that could rewrite the course of history. As the world grapples with the aftermath of the Whisper Protocol, an advanced artificial intelligence, "Kaal Netra," emerges, threatening global stability. Old alliances crumble, and new heroes must rise to confront a power unlike any seen before.
+                </p>
+                <p class="text-gray-400 text-base italic mb-4">
+                    "An explosive sequel that builds brilliantly on its predecessor, delivering twists and turns at every chapter." - Futuristic Reads
+                </p>
+                <button class="btn-secondary text-base px-8 py-3" onclick="showKaalNetraModal();">STAY TUED FOR UPDATES</button>
+            </div>
+        </div>
+
+        <!-- Book 3: Book III Coming Soon -->
+        <div id="book3-section" class="card flex flex-col md:flex-row items-center md:items-start text-center md:text-left p-6 mb-12">
+            <img src="https://placehold.co/200x300/1a202c/e2e8f0?text=BOOK+III+COMING+SOON" alt="Book III Coming Soon cover" class="rounded-lg w-full max-w-[200px] h-auto object-cover md:mr-8 mb-6 md:mb-0">
+            <div class="flex-grow">
+                <h2 class="text-3xl font-semibold mb-4 text-gradient">BOOK III: [TITLE TO BE REVEALED]</h2>
+                <p class="text-gray-300 text-lg mb-4">
+                    The epic conclusion to The Genome Project Trilogy. A gripping, high-stakes journey where science and intrigue collide. Learn the truth in 2025. This final installment promises to tie together all the loose ends, delivering a powerful and unforgettable resolution to the saga.
+                </p>
+                <p class="text-gray-400 text-base italic mb-4">
+                    "Anticipation is building for the final chapter of this groundbreaking series!" - The Literary Voice
+                </p>
+                <button class="btn-secondary text-base px-8 py-3" onclick="showBook3Modal();">STAY TUNED FOR UPDATES</button>
+            </div>
+        </div>
+
     </section>
 
-    <!-- Book/Dossier Cards Section -->
-    <section class="container mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <!-- Card 1: The Whisper Protocol -->
-        <div class="card flex flex-col items-center text-center">
-            <h3 class="text-2xl font-semibold mb-4 text-white">THE<br>WHISPER<br>PROTOCOL</h3>
-            <!-- Updated image source for Whisper Protocol -->
-            <img src="../images/whisper_protocol_cover.png" alt="The Whisper Protocol cover" class="mb-4 rounded-lg w-full max-w-[150px] h-auto object-cover">
-            <p class="text-gray-400 text-sm mb-6">
-                A cryptic signal, a genetic fiddle, and a race against time to unlock a-shadowy government secret...
-            </p>
-            <button class="btn-secondary text-sm px-6 py-2">LEARN MORE</button>
+    <!-- Footer -->
+    <footer class="py-8 text-center text-gray-500 text-sm">
+        <div class="container mx-auto px-4">
+            &copy; 2025 K.V. Raman. All rights reserved.
         </div>
+    </footer>
 
-        <!-- Card 2: Kaal Netra Rising -->
-        <div class="card flex flex-col items-center text-center">
-            <h3 class="text-2xl font-semibold mb-4 text-white">KAAL<br>NETRA<br>RISING</h3>
-            <!-- Updated image source for Kaal Netra Rising -->
-            <img src="../images/kaalnetra_cover.png" alt="Kaal Netra Rising cover" class="mb-4 rounded-lg w-full max-w-[150px] h-auto object-cover">
-            <p class="text-gray-400 text-sm mb-6">
-                A rogue AI, a divided nation, and the search for a weapon that could rewrite the course of...
+    <!-- Modal for Kaal Netra Rising -->
+    <div id="kaalNetraModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="bg-gray-800 p-8 rounded-lg shadow-xl max-w-md w-full relative border border-gray-700">
+            <h3 class="text-2xl font-bold text-gradient mb-4">Kaal Netra Rising</h3>
+            <p class="text-gray-300 mb-6">
+                Thank you for your interest! "Kaal Netra Rising" is currently being written. Please stay tuned for updates on its release!
             </p>
-            <button class="btn-secondary text-sm px-6 py-2">LEARN MORE</button>
+            <button class="absolute top-4 right-4 text-gray-400 hover:text-white" onclick="hideKaalNetraModal()">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
         </div>
+    </div>
 
-        <!-- Card 3: Book III Coming Soon -->
-        <div class="card flex flex-col items-center text-center">
-            <h3 class="text-2xl font-semibold mb-4 text-white">BOOK III<br>COMING SOON</h3>
-            <!-- Placeholder for book icon/image - kept as placeholder as no specific image was provided -->
-            <img src="https://placehold.co/150x200/1a202c/e2e8f0?text=BOOK+III+COMING+SOON" alt="Book icon" class="mb-4 rounded-lg w-full max-w-[150px] h-auto object-cover">
-            <p class="text-gray-400 text-sm mb-6">
-                A gripping, high-stakes journey where science and intrigue collide. Learn the truth in 2025...
+    <!-- Modal for Book III Coming Soon -->
+    <div id="book3Modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="bg-gray-800 p-8 rounded-lg shadow-xl max-w-md w-full relative border border-gray-700">
+            <h3 class="text-2xl font-bold text-gradient mb-4">Book III: Coming Soon!</h3>
+            <p class="text-gray-300 mb-6">
+                Thank you for your interest! The final installment of "The Genome Project Trilogy" is currently in development and is expected to be released in 2025. Stay tuned for official announcements!
             </p>
-            <button class="btn-secondary text-sm px-6 py-2">LEARN MORE</button>
+            <button class="absolute top-4 right-4 text-gray-400 hover:text-white" onclick="hideBook3Modal()">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
         </div>
-
-        <!-- Card 4: Character Dossiers -->
-        <div class="card flex flex-col items-center text-center">
-            <h3 class="text-2xl font-semibold mb-4 text-white">CHARACTER<br>DOSSIERS</h3>
-            <p class="text-gray-300 text-lg mb-2">Rudra Chauhan</p>
-            <p class="text-gray-300 text-lg mb-6">Parvati Iyer<br>Antagonists</p>
-            <p class="text-gray-400 text-sm mb-6 italic">
-                "A gripping, high-stakes journey where science and intrigue collide – The Sci-Fi Review."
-            </p>
-            <button class="btn-secondary text-sm px-6 py-2">LEARN MORE</button>
-        </div>
-    </section>
+    </div>
 
     <script>
         // JavaScript for mobile menu toggling
@@ -127,6 +157,28 @@
                 mobileMenu.classList.add('hidden');
             });
         });
+
+        // JavaScript for Kaal Netra Rising Modal
+        const kaalNetraModal = document.getElementById('kaalNetraModal');
+
+        function showKaalNetraModal() {
+            kaalNetraModal.classList.remove('hidden');
+        }
+
+        function hideKaalNetraModal() {
+            kaalNetraModal.classList.add('hidden');
+        }
+
+        // JavaScript for Book 3 Modal
+        const book3Modal = document.getElementById('book3Modal');
+
+        function showBook3Modal() {
+            book3Modal.classList.remove('hidden');
+        }
+
+        function hideBook3Modal() {
+            book3Modal.classList.add('hidden');
+        }
     </script>
 </body>
 </html>
