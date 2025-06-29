@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>K.V. Raman - The Genome Project Trilogy</title>
+    <title>K.V. Raman - About</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
             <nav class="hidden md:flex space-x-6">
                 <a href="index.html" class="text-gradient hover:text-[#f9e7bc] transition duration-300">HOME</a>
                 <a href="about.html" class="text-gradient hover:text-[#f9e7bc] transition duration-300">ABOUT</a>
-                <a href="trilogy.html" class="text-gradient hover:text-[#f9e7bc] transition duration-300">THE TRILOGY</a>
+                <a href="#" class="text-gradient hover:text-[#f9e7bc] transition duration-300">THE TRILOGY</a>
                 <a href="#" class="text-gradient hover:text-[#f9e7bc] transition duration-300">DOSSIERS</a>
                 <a href="#" class="text-gradient hover:text-[#f9e7bc] transition duration-300">MEDIA</a>
                 <a href="#" class="text-gradient hover:text-[#f9e7bc] transition duration-300">CONTACT</a>
@@ -39,73 +39,37 @@
             </button>
             <a href="index.html" class="text-gradient hover:text-[#f9e7bc] text-3xl transition duration-300">HOME</a>
             <a href="about.html" class="text-gradient hover:text-[#f9e7bc] text-3xl transition duration-300">ABOUT</a>
-            <a href="trilogy.html" class="text-gradient hover:text-[#f9e7bc] text-3xl transition duration-300">THE TRILOGY</a>
+            <a href="#" class="text-gradient hover:text-[#f9e7bc] text-3xl transition duration-300">THE TRILOGY</a>
             <a href="#" class="text-gradient hover:text-[#f9e7bc] text-3xl transition duration-300">DOSSIERS</a>
             <a href="#" class="text-gradient hover:text-[#f9e7bc] text-3xl transition duration-300">MEDIA</a>
             <a href="#" class="text-gradient hover:text-[#f9e7bc] text-3xl transition duration-300">CONTACT</a>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="text-center py-20 px-4">
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gradient mb-4">
-            THE GENOME PROJECT TRILOGY
+    <!-- About Section -->
+    <section class="container mx-auto px-4 py-20 text-center">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gradient mb-8">
+            ABOUT K V RAMAN
         </h1>
-        <p class="text-xl sm:text-2xl text-gradient mb-8">
-            A Sci-Fi Thriller Series by K V Raman
-        </p>
-        <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <button class="btn-primary" onclick="window.location.href='trilogy.html';">EXPLORE THE BOOKS</button>
-            <button class="btn-secondary">READ A FREE SAMPLE</button>
+        <div class="bg-transparent card mx-auto max-w-3xl text-left p-8">
+            <p class="text-lg text-gray-300 mb-6">
+             K V Raman is a debutante author with a passion for weaving stories that bridge the worlds of science, technology, and human intrigue. With a background in commerce and a lifelong fascination for speculative fiction, Raman’s writing explores the frontiers where scientific discovery meets the mysteries of the human spirit.   
+            </p>
+            <p class="text-lg text-gray-300 mb-6">
+             His first novel, The Whisper Protocol, is the opening chapter of the Genome Project Trilogy—a genre-bending sci-fi thriller that delves into genetic conspiracies, secret organizations, and the ethical questions of our technological age. Inspired by classic science fiction and the pulse of modern India, Raman crafts narratives that are both thought-provoking and relentlessly suspenseful.   
+            </p>
+            <p class="text-lg text-gray-300">
+             When he isn’t writing, Raman enjoys exploring new advancements in science, reading about ancient civilizations, and pondering the “what ifs” that lie just beyond the edge of possibility. The Whisper Protocol marks the beginning of his journey as an author, and he invites readers to join him as he uncovers the secrets of the Genome Project.   
+            </p>
         </div>
     </section>
 
-    <!-- Book/Dossier Cards Section -->
-    <section class="container mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <!-- Card 1: The Whisper Protocol -->
-        <div class="card flex flex-col items-center text-center">
-            <h3 class="text-2xl font-semibold mb-4 text-white">THE<br>WHISPER<br>PROTOCOL</h3>
-            <!-- Updated image source for Whisper Protocol -->
-            <img src="../images/whisper_protocol_cover.png" alt="The Whisper Protocol cover" class="mb-4 rounded-lg w-full max-w-[150px] h-auto object-cover">
-            <p class="text-gray-400 text-sm mb-6">
-                A cryptic signal, a genetic fiddle, and a race against time to unlock a-shadowy government secret...
-            </p>
-            <button class="btn-secondary text-sm px-6 py-2">LEARN MORE</button>
+    <!-- Footer (Optional, but good for consistency) -->
+    <footer class="py-8 text-center text-gray-500 text-sm">
+        <div class="container mx-auto px-4">
+            &copy; 2025 K.V. Raman. All rights reserved.
         </div>
-
-        <!-- Card 2: Kaal Netra Rising -->
-        <div class="card flex flex-col items-center text-center">
-            <h3 class="text-2xl font-semibold mb-4 text-white">KAAL<br>NETRA<br>RISING</h3>
-            <!-- Updated image source for Kaal Netra Rising -->
-            <img src="../images/kaalnetra_cover.png" alt="Kaal Netra Rising cover" class="mb-4 rounded-lg w-full max-w-[150px] h-auto object-cover">
-            <p class="text-gray-400 text-sm mb-6">
-                A rogue AI, a divided nation, and the search for a weapon that could rewrite the course of...
-            </p>
-            <button class="btn-secondary text-sm px-6 py-2">LEARN MORE</button>
-        </div>
-
-        <!-- Card 3: Book III Coming Soon -->
-        <div class="card flex flex-col items-center text-center">
-            <h3 class="text-2xl font-semibold mb-4 text-white">BOOK III<br>COMING SOON</h3>
-            <!-- Placeholder for book icon/image - kept as placeholder as no specific image was provided -->
-            <img src="https://placehold.co/150x200/1a202c/e2e8f0?text=BOOK+III+COMING+SOON" alt="Book icon" class="mb-4 rounded-lg w-full max-w-[150px] h-auto object-cover">
-            <p class="text-gray-400 text-sm mb-6">
-                A gripping, high-stakes journey where science and intrigue collide. Learn the truth in 2025...
-            </p>
-            <button class="btn-secondary text-sm px-6 py-2">LEARN MORE</button>
-        </div>
-
-        <!-- Card 4: Character Dossiers -->
-        <div class="card flex flex-col items-center text-center">
-            <h3 class="text-2xl font-semibold mb-4 text-white">CHARACTER<br>DOSSIERS</h3>
-            <p class="text-gray-300 text-lg mb-2">Rudra Chauhan</p>
-            <p class="text-gray-300 text-lg mb-6">Parvati Iyer<br>Antagonists</p>
-            <p class="text-gray-400 text-sm mb-6 italic">
-                "A gripping, high-stakes journey where science and intrigue collide – The Sci-Fi Review."
-            </p>
-            <button class="btn-secondary text-sm px-6 py-2">LEARN MORE</button>
-        </div>
-    </section>
+    </footer>
 
     <script>
         // JavaScript for mobile menu toggling
