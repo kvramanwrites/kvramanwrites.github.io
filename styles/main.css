@@ -4,7 +4,7 @@ body {
     font-family: 'Inter', sans-serif;
     background-color: #0d1117; /* Dark background similar to image */
     color: #d1b272; /* Changed to a gold color for all default text */
-    background-image: url('../images/Website.jpg'); /* Added background image */
+    background-image: url('Website.jpg'); /* Added background image */
     background-size: cover; /* Cover the entire area */
     background-position: center top; /* Center the image and align to top */
     background-repeat: no-repeat; /* Do not repeat the image */
@@ -37,10 +37,10 @@ body {
     background-color: #f9e7bc; /* Lighter gold on hover */
 }
 .card {
-    background-color: #1a202c; /* Card background */
+    background-color: transparent; /* Changed to transparent */
     border-radius: 0.75rem;
     padding: 1.5rem;
-    border: 1px solid #2d3748;
+    border: 1px solid #2d3748; /* Keep border for visibility if desired */
 }
 .text-gradient {
     background: linear-gradient(90deg, #d1b272 0%, #f9e7bc 100%);
