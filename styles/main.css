@@ -3,7 +3,8 @@
 body {
     font-family: 'Inter', sans-serif;
     background-color: #0d1117; /* Dark background similar to image */
-    color: #e2e8f0; /* Light text color */
+    color: #d1b272; /* Changed to a gold color for all default text */
+
 }
 .container {
     max-width: 1200px;
