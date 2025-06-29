@@ -128,5 +128,27 @@
             });
         });
     </script>
+
+<script>
+  // Highlight the active nav item on both desktop and mobile menus based on URL
+  document.addEventListener("DOMContentLoaded", function() {
+    function activateLinks(navSelector) {
+      const links = document.querySelectorAll(navSelector + " a");
+      const path = window.location.pathname.split('/').pop() || "index.html";
+      links.forEach(link => {
+        let linkHref = link.getAttribute('href');
+        if (!linkHref) return;
+        let cleanHref = linkHref.split('/').pop();
+        if ((path === "index.html" && (cleanHref === "" || cleanHref === "index.html")) ||
+            (cleanHref && path === cleanHref)) {
+          link.classList.add('active');
+        }
+      });
+    }
+    activateLinks("nav");
+    activateLinks("#mobile-menu");
+  });
+</script>
+
 </body>
 </html>
