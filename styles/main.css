@@ -4,11 +4,7 @@ body {
     font-family: 'Inter', sans-serif;
     background-color: #0d1117; /* Dark background similar to image */
     color: #d1b272; /* Changed to a gold color for all default text */
-    background-image: url('../images/Website.jpg'); /* Added background image */
-    background-size: cover; /* Cover the entire area */
-    background-position: center top; /* Center the image and align to top */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-attachment: fixed; /* Keep background fixed when scrolling */
+    /* Removed background-image properties from here */
 }
 .container {
     max-width: 1200px;
