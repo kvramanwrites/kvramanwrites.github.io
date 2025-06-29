@@ -16,15 +16,15 @@
         <div class="container mx-auto px-4 flex justify-between items-center">
             <div class="text-2xl font-bold text-gradient">K V RAMAN</div>
             <nav class="hidden md:flex space-x-6">
-               <a href="#" class="text-gradient hover:text-[#f9e7bc] transition duration-300">HOME</a>
+                <a href="index.html" class="text-gradient hover:text-[#f9e7bc] transition duration-300">HOME</a>
                 <a href="about.html" class="text-gradient hover:text-[#f9e7bc] transition duration-300">ABOUT</a>
                 <a href="trilogy.html" class="text-gradient hover:text-[#f9e7bc] transition duration-300">THE TRILOGY</a>
-                <a href="#" class="#" class="text-gradient hover:text-[#f9e7bc] transition duration-300">DOSSIERS</a>
+                <a href="#" class="text-gradient hover:text-[#f9e7bc] transition duration-300">DOSSIERS</a>
                 <a href="#" class="text-gradient hover:text-[#f9e7bc] transition duration-300">MEDIA</a>
                 <a href="#" class="text-gradient hover:text-[#f9e7bc] transition duration-300">CONTACT</a>
-           </nav>
+            </nav>
             <!-- Mobile Menu Button (Hamburger) -->
-            <button id="mobile-menu-button" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
+            <button id="mobile-menu-button" class="md:hidden text-gradient hover:text-[#f9e7bc] focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
@@ -32,12 +32,12 @@
         </div>
         <!-- Mobile Menu Overlay -->
         <div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-gray-900 bg-opacity-95 z-50 flex flex-col items-center justify-center space-y-8">
-            <button id="close-mobile-menu" class="absolute top-4 right-4 text-gray-300 hover:text-white focus:outline-none">
+            <button id="close-mobile-menu" class="absolute top-4 right-4 text-gradient hover:text-[#f9e7bc] focus:outline-none">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
-           <a href="#" class="text-gradient hover:text-[#f9e7bc] text-3xl transition duration-300">HOME</a>
+            <a href="index.html" class="text-gradient hover:text-[#f9e7bc] text-3xl transition duration-300">HOME</a>
             <a href="about.html" class="text-gradient hover:text-[#f9e7bc] text-3xl transition duration-300">ABOUT</a>
             <a href="trilogy.html" class="text-gradient hover:text-[#f9e7bc] text-3xl transition duration-300">THE TRILOGY</a>
             <a href="#" class="text-gradient hover:text-[#f9e7bc] text-3xl transition duration-300">DOSSIERS</a>
@@ -51,12 +51,11 @@
         <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gradient mb-4">
             THE GENOME PROJECT TRILOGY
         </h1>
-        <!-- Subtitle updated with text-gradient class -->
         <p class="text-xl sm:text-2xl text-gradient mb-8">
             A Sci-Fi Thriller Series by K V Raman
         </p>
         <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <button class="btn-primary">EXPLORE THE BOOKS</button>
+            <button class="btn-primary" onclick="window.location.href='trilogy.html';">EXPLORE THE BOOKS</button>
             <button class="btn-secondary">READ A FREE SAMPLE</button>
         </div>
     </section>
@@ -65,10 +64,10 @@
     <section class="container mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <!-- Card 1: The Whisper Protocol -->
         <div class="card flex flex-col items-center text-center">
-            <h3 class="text-2xl font-semibold mb-4 text-white">THE WHISPER<br>PROTOCOL</h3>
-             <!-- Updated image source for Whisper Protocol -->
-            <img src="../images/whisper_protocol_cover.png" alt="The Whisper Protocol cover" class="mb-4 rounded-lg w-full max-w-[150px] h-auto object-cover">           
-             <p class="text-gray-400 text-sm mb-6">
+            <h3 class="text-2xl font-semibold mb-4 text-white">THE<br>WHISPER<br>PROTOCOL</h3>
+            <!-- Updated image source for Whisper Protocol -->
+            <img src="../images/whisper_protocol_cover.png" alt="The Whisper Protocol cover" class="mb-4 rounded-lg w-full max-w-[150px] h-auto object-cover">
+            <p class="text-gray-400 text-sm mb-6">
                 A cryptic signal, a genetic fiddle, and a race against time to unlock a-shadowy government secret...
             </p>
             <button class="btn-secondary text-sm px-6 py-2">LEARN MORE</button>
@@ -76,8 +75,8 @@
 
         <!-- Card 2: Kaal Netra Rising -->
         <div class="card flex flex-col items-center text-center">
-            <h3 class="text-2xl font-semibold mb-4 text-white">KAALNETRA<br>RISING</h3>
-          <!-- Updated image source for Kaal Netra Rising -->
+            <h3 class="text-2xl font-semibold mb-4 text-white">KAAL<br>NETRA<br>RISING</h3>
+            <!-- Updated image source for Kaal Netra Rising -->
             <img src="../images/kaalnetra_cover.png" alt="Kaal Netra Rising cover" class="mb-4 rounded-lg w-full max-w-[150px] h-auto object-cover">
             <p class="text-gray-400 text-sm mb-6">
                 A rogue AI, a divided nation, and the search for a weapon that could rewrite the course of...
@@ -88,8 +87,8 @@
         <!-- Card 3: Book III Coming Soon -->
         <div class="card flex flex-col items-center text-center">
             <h3 class="text-2xl font-semibold mb-4 text-white">BOOK III<br>COMING SOON</h3>
-            <!-- Placeholder for book icon/image -->
-            <img src="https://placehold.co/100x100/1a202c/e2e8f0?text=Book" alt="Book icon" class="mb-4 rounded-lg">
+            <!-- Placeholder for book icon/image - kept as placeholder as no specific image was provided -->
+            <img src="https://placehold.co/150x200/1a202c/e2e8f0?text=BOOK+III+COMING+SOON" alt="Book icon" class="mb-4 rounded-lg w-full max-w-[150px] h-auto object-cover">
             <p class="text-gray-400 text-sm mb-6">
                 A gripping, high-stakes journey where science and intrigue collide. Learn the truth in 2025...
             </p>
