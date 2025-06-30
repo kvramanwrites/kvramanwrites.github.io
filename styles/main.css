@@ -176,3 +176,10 @@ background: linear-gradient(90deg, #ffe7a6 0%, #d1b272 100%);
 box-shadow: 0 0 8px #d1b272cc;
 margin-top: 4px;
 }
+.card img {
+    transition: transform 0.3s ease-in-out; /* Smooth transition for zoom */
+}
+
+.card img:hover {
+    transform: scale(1.05); /* Zoom in by 5% on hover */
+}
