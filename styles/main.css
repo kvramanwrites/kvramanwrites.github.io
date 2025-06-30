@@ -149,3 +149,30 @@ nav a.text-gradient:not(.active),
 #mobile-menu a.text-gradient:not(.active) {
   text-shadow: none;
 }
+
+nav a,
+#mobile-menu a {
+position: relative;
+transition: color 0.2s;
+}
+
+nav a:hover,
+#mobile-menu a:hover {
+color: #d1b272 !important;
+text-shadow:
+0 0 10px #d1b272cc,
+0 0 20px #ffe7a680;
+}
+
+nav a:hover::after,
+#mobile-menu a:hover::after {
+content: '';
+display: block;
+margin: 0 auto;
+width: 60%;
+height: 2px;
+border-radius: 1px;
+background: linear-gradient(90deg, #ffe7a6 0%, #d1b272 100%);
+box-shadow: 0 0 8px #d1b272cc;
+margin-top: 4px;
+}
