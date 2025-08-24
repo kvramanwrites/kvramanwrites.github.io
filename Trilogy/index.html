@@ -127,15 +127,6 @@
         </div>
     </section>
 
-    <!-- Visitor Counter Section -->
-    <section class="bg-gray-800 py-8 px-6 md:px-12 text-center">
-        <div class="container mx-auto">
-            <p class="text-gray-300 text-lg">
-                Visitors to this site: <span id="visitorCount" class="font-bold text-white text-xl">Loading...</span>
-            </p>
-        </div>
-    </section>
-
     <!-- Footer (Optional, but good for consistency) -->
     <footer class="py-8 text-center text-gray-500 text-sm">
         <div class="container mx-auto px-4">
@@ -184,77 +175,6 @@
             activateLinks("nav");
             activateLinks("#mobile-menu");
         });
-    </script>
-
-    <!-- Firebase SDKs for Visitor Counter -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        // Firebase configuration (provided by the environment)
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-
-        // Function to update and display visitor count
-        async function updateVisitorCount() {
-            const visitorCountElement = document.getElementById('visitorCount');
-            if (!visitorCountElement) {
-                console.error("Visitor count element not found.");
-                return;
-            }
-
-            try {
-                // Sign in anonymously if not already authenticated
-                // This ensures there's an auth.currentUser before attempting Firestore operations
-                if (!auth.currentUser) {
-                    await signInAnonymously(auth);
-                    console.log("Signed in anonymously.");
-                }
-
-                // Define the path for the public visitor count
-                // Storing in /artifacts/{appId}/public/data/visitor_counts/kvramanwrites
-                const visitorCountRef = doc(db, `artifacts/${appId}/public/data/visitor_counts`, 'kvramanwrites');
-
-                // Get the current count
-                const docSnap = await getDoc(visitorCountRef);
-
-                let currentCount = 0;
-                if (docSnap.exists()) {
-                    currentCount = docSnap.data().count || 0;
-                }
-
-                // Increment the count and update Firestore
-                // Using setDoc with merge: true will create the document if it doesn't exist
-                // and update only the 'count' field if it does.
-                await setDoc(visitorCountRef, { count: increment(1) }, { merge: true });
-
-                // Display the updated count (fetch again to ensure latest value)
-                // Fetching again ensures we display the count after the increment has been applied.
-                const updatedDocSnap = await getDoc(visitorCountRef);
-                if (updatedDocSnap.exists()) {
-                    visitorCountElement.textContent = updatedDocSnap.data().count;
-                } else {
-                    // Fallback in case immediate read fails for some reason
-                    visitorCountElement.textContent = currentCount + 1;
-                }
-                console.log("Visitor count updated successfully.");
-
-            } catch (error) {
-                console.error("Error updating visitor count:", error);
-                // Display a user-friendly message in case of error
-                visitorCountElement.textContent = "Error loading count.";
-            }
-        }
-
-        // Call the function when the window loads
-        // This ensures the visitor count is updated as soon as the page is ready.
-        window.onload = updateVisitorCount;
     </script>
 </body>
 </html>
