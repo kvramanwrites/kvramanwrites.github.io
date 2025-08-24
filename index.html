@@ -93,7 +93,7 @@
 
                 <div class="flex flex-col lg:flex-row items-start space-y-8 lg:space-y-0 lg:space-x-12">
                     <div class="lg:w-1/4 flex-shrink-0">
-                        <img src="images/sat.png" alt="Satellite Dish Icon" class="w-24 md:w-32 lg:w-40 mx-auto lg:mx-0">
+                        <img src="images/sat.png" alt="Satellite Dish" class="w-24 md:w-32 lg:w-40 mx-auto lg:mx-0">
                     </div>
                     <div class="lg:w-3/4">
                         <h1 class="text-lg md:text-xl lg:text-2xl font-bold mb-4">WELCOME TO THE AUTHOR NODE:</h1>
@@ -190,18 +190,6 @@
                     clearInterval(typingInterval);
                 }
             }, 50); // Adjust typing speed here
-        }
-
-        // Simple SVG for the satellite dish icon
-        // This is a cleaner approach than relying on a separate image file
-        const satelliteSvg = `
-        <svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 5C25.1472 5 5 25.1472 5 50C5 74.8528 25.1472 95 50 95C74.8528 95 95 74.8528 95 50C95 45.4542 93.9995 41.0189 92.0911 36.9388L50 50L92.0911 36.9388ZM50 50C50 33.4315 36.5685 20 20 20L20 80C36.5685 80 50 66.5685 50 50ZM50 50C50 66.5685 63.4315 80 80 80L80 20C63.4315 20 50 33.4315 50 50Z" fill="#00ff00" stroke="#00ff00" stroke-width="2"/>
-        </svg>
-        `;
-        const satelliteImage = document.querySelector('img[alt="Satellite Dish Icon"]');
-        if (satelliteImage) {
-            satelliteImage.outerHTML = satelliteSvg;
         }
     </script>
 </body>
