@@ -1,0 +1,48 @@
+/* Mission Brief page styling */
+.brief-body {
+  font-family: 'Courier New', monospace;
+  background: #0d0d0d;
+  color: #00ffcc;
+  margin: 0;
+  padding: 0;
+}
+
+.brief-header {
+  background: #111;
+  border-bottom: 2px solid #00ffcc;
+  padding: 2rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.brief-header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  color: #00ffe0;
+  text-shadow: 0 0 6px #00ffe0, 0 0 12px #008888;
+}
+
+.brief-section {
+  padding: 2rem;
+  border-left: 3px solid #00ffcc;
+  margin: 2rem;
+  background: rgba(0, 255, 200, 0.05);
+}
+
+.brief-section h2 {
+  color: #ff0044;
+  text-shadow: 0 0 5px #ff0044;
+}
+
+.brief-section ul {
+  list-style-type: "🔒 ";
+  margin-left: 1.5rem;
+}
+
+.brief-footer {
+  text-align: center;
+  padding: 1.5rem;
+  border-top: 2px solid #00ffcc;
+  color: #888;
+  font-size: 0.9rem;
+}
