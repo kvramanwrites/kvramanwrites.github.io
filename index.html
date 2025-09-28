@@ -3,287 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>K.V. Raman - Author Node</title>
-    <meta name="description" content="K.V. Raman's official website, styled as a secure, confidential terminal interface.">
-    <!-- Note: favicon link removed to prevent file dependency issues -->
-
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Google Fonts for a Monospace look -->
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
-
-    <style>
-        /* General body and typography styles for the CLI theme */
-        body {
-            font-family: 'Fira Code', monospace;
-            background-color: #000;
-            color: #00ff00; /* Vibrant green text */
-            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5); /* Subtle glow effect */
-            overflow-x: hidden; /* Prevents horizontal scroll */
-        }
-
-        /* Responsive padding and margins for a clean layout */
-        .container {
-            padding: 1rem;
-        }
-        @media (min-width: 768px) {
-            .container {
-                padding: 2rem;
-            }
-        }
-        @media (min-width: 1024px) {
-            .container {
-                padding: 4rem;
-            }
-        }
-
-        /* Specific styling for the 'Decrypting' animation */
-        .decrypting-text::after {
-            content: '_'; /* Cursor */
-            animation: blink-cursor 1s step-end infinite;
-        }
-        @keyframes blink-cursor {
-            from, to { opacity: 0; }
-            50% { opacity: 1; }
-        }
-
-        /* Underline effect on hover for links */
-        a {
-            text-decoration: none;
-            position: relative;
-        }
-        a::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -2px;
-            width: 0;
-            height: 1px;
-            background-color: #00ff00;
-            transition: width 0.3s ease-in-out;
-        }
-        a:hover::after {
-            width: 100%;
-        }
-
-        /* --- Custom Navigation Styles for Archives Dropdown --- */
-        .nav-link:hover {
-            color: #fff; /* White hover effect, which will now stand out more */
-        }
-        .archives-wrapper {
-            position: relative;
-        }
-        .archives-list {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            display: none;
-            z-index: 50;
-            min-width: 280px;
-            background-color: #000;
-            border: 1px solid #00ff00;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
-            padding: 0.5rem 0;
-            margin-top: 0.5rem;
-        }
-        .archives-wrapper:hover .archives-list {
-            display: block;
-        }
-        .archive-item {
-            padding: 0.5rem 1rem;
-            color: #00ff00;
-            transition: background-color 0.2s;
-        }
-        .archive-item:hover {
-            background-color: rgba(0, 255, 0, 0.15);
-            color: #ffffff;
-            cursor: pointer;
-        }
-
-        /* --- Satellite Dish Animation --- */
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        .satellite-dish {
-            animation: rotate 15s linear infinite;
-        }
-    </style>
+    <title>Author Node</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body class="antialiased">
-    <div class="min-h-screen flex flex-col">
-        <!-- Header/Navigation -->
-        <header class="py-4 md:py-8 border-b border-green-800">
-            <div class="container mx-auto flex justify-between items-center text-xs md:text-sm lg:text-base space-x-4">
-                <nav class="flex-grow flex justify-start space-x-6">
-                    <!-- REMOVED: text-white -->
-                    <a href="index.html" class="uppercase nav-link font-bold bg-green-900/50 px-2 py-1 rounded">HOME (Author Node)</a>
-                    <a href="mission-brief.html" class="uppercase nav-link">Mission Brief</a>
+<body>
+    <header>
+        <nav class="container">
+            <ul>
+                <li><a href="#">MISSION BRIEF</a></li>
+                <li><a href="#">ARCHIVES</a></li>
+                <li><a href="#">SIGNAL LOG</a></li>
+                <li><a href="#">SECURE LINE</a></li>
+            </ul>
+        </nav>
+    </header>
 
-                    <!-- Archives Dropdown Re-implemented -->
-                    <div class="archives-wrapper">
-                        <a href="archives.html" class="uppercase nav-link">Archives</a>
-                        <div class="archives-list">
-                            <!-- Book Titles - Synced with Archives Section Below -->
-                            <div class="archive-item" onclick="window.location.href='books.html#whisper'">THE WHISPER PROTOCOL</div>
-                            <div class="archive-item" onclick="window.location.href='books.html#accountable'">ACCOUNTABLE (WIP)</div>
-                            <div class="archive-item" onclick="window.location.href='books.html#kaalnetra'">KAALNETRA RISING</div>
-                            <div class="archive-item" onclick="window.location.href='books.html#mylapore'">THE MYLAPORE FILES</div>
-                            <div class="archive-item" onclick="window.location.href='books.html#zeroday'">ZERO DAY DIVIDE (Upcoming)</div>
-                            <div class="w-full h-px bg-green-900 my-1 mx-2"></div>
-                            <div class="archive-item text-white bg-green-800 hover:bg-green-700 font-bold" onclick="window.location.href='archives.html'">ACCESS ALL FILES (CLICK)</div>
-                        </div>
-                    </div>
+    <main class="container">
+        <section class="transmission-header">
+            <p>>>> INCOMING TRANSMISSION...</p>
+            <p>&lt; DECRYPTING PROFILE...</p>
+        </section>
 
-                    <a href="signal-log.html" class="uppercase nav-link">Signal Log</a>
-                    <a href="secure-line.html" class="uppercase nav-link">Secure Line</a>
-                </nav>
+        <section class="welcome-section">
+            <div class="welcome-image">
+                <img src="https://via.placeholder.com/150" alt="Satellite dish icon">
             </div>
-        </header>
+            <div class="welcome-text">
+                <h2>WELCOME TO THE AUTHOR NODE:</h2>
+                <p>KV Raman, civilian designation. Specializes in crafting narratives that dissect systems, unravel conspiracies, and chronicle battles waged in shadows and minds.</p>
+            </div>
+        </section>
 
-        <!-- Main Content Area -->
-        <main class="flex-grow container mx-auto py-8 md:py-16">
-            <!-- Incoming Transmission Section -->
-            <section class="mb-12 md:mb-20">
-                <p class="text-sm md:text-base lg:text-lg mb-2">&gt;&gt;&gt; INCOMING TRANSMISSION...</p>
-                <div class="flex items-center space-x-4 mb-8">
-                    <span class="text-sm md:text-base lg:text-lg decrypting-text">□ DECRYPTING PROFILE...</span>
+        <hr class="divider">
+
+        <section class="mission-brief">
+            <h2>MISSION BRIEF</h2>
+            <p>Former number cruncher turned narrative operator. KV Raman engineers speculative thrillers rooted in survillance states, memory warfare, and battlefield ethics.</p>
+        </section>
+
+        <hr class="divider">
+
+        <section class="archives">
+            <h2>ARCHIVES</h2>
+            <div class="archive-item">
+                <div class="archive-title-description">
+                    <h3>THE WHISPER PROTOCOL</h3>
+                    <p>Mind-hacking, False memorys.</p>
                 </div>
-
-                <div class="flex flex-col lg:flex-row items-start space-y-8 lg:space-y-0 lg:space-x-12">
-                    <!-- Satellite Dish SVG Wireframe (Replaced broken image) -->
-                    <div class="lg:w-1/4 flex-shrink-0 flex justify-center lg:justify-start">
-                        <svg class="satellite-dish w-24 h-24 md:w-32 lg:w-40" viewBox="0 0 100 100" fill="none" stroke="#00ff00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <!-- Dish -->
-                            <path d="M50 85 C 80 85, 90 60, 50 40 C 10 60, 20 85, 50 85 Z" fill="none"/>
-                            <!-- Feed Horn / Center -->
-                            <circle cx="50" cy="50" r="5" fill="#00ff00"/>
-                            <!-- Arm -->
-                            <path d="M50 50 L 50 40 L 55 35" fill="none"/>
-                            <!-- Base/Stand -->
-                            <path d="M40 85 L 60 85 M 50 85 L 50 95 M 45 95 L 55 95" fill="none"/>
-                            <!-- Wave Lines -->
-                            <path d="M70 60 C 75 50, 80 60, 85 50" fill="none"/>
-                            <path d="M75 65 C 80 55, 85 65, 90 55" fill="none"/>
-                            <path d="M80 70 C 85 60, 90 70, 95 60" fill="none"/>
-                        </svg>
-                    </div>
-                    <div class="lg:w-3/4">
-                        <!-- REMOVED: text-white -->
-                        <h1 class="text-lg md:text-xl lg:text-2xl font-bold mb-4">WELCOME TO THE AUTHOR NODE:</h1>
-                        <!-- Retained text-green-300 to keep the slightly muted paragraph color -->
-                        <p class="text-base md:text-lg lg:text-xl leading-relaxed text-green-300">
-                            KV Raman, civilian designation. Specializes in crafting narratives that dissect systems, unravel conspiracies, and chronicle battles waged in shadows and minds.
-                        </p>
-                    </div>
+                <div class="archive-synopsis">
+                    <p>Genome conspiracies, AI gosts, and a hiden war of</p>
                 </div>
-            </section>
+            </div>
 
-            <!-- Mission Brief Section -->
-            <section class="mb-12 md:mb-20">
-                <!-- REMOVED: text-white -->
-                <h2 class="text-lg md:text-xl lg:text-2xl font-bold mb-4">MISSION BRIEF</h2>
-                <!-- Retained text-green-300 to keep the slightly muted paragraph color -->
-                <p class="text-base md:text-lg lg:text-xl leading-relaxed text-green-300">
-                    Former number cruncher turned narrative operator. KV Raman engineers speculative thrillers rooted in surveillance states, memory warfare, and battlefield ethics. His work explores the digital self, where memory is code, and identity is an algorithm that can be hacked.
-                </p>
-            </section>
-
-            <!-- Archives Section -->
-            <section class="mb-12 md:mb-20">
-                <!-- REMOVED: text-white -->
-                <h2 class="text-lg md:text-xl lg:text-2xl font-bold mb-6">ARCHIVES</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- The Whisper Protocol -->
-                    <div class="p-4 border border-green-900 rounded-lg hover:border-green-600 transition duration-200">
-                        <a href="books.html#whisper" class="block">
-                            <!-- REMOVED: text-white -->
-                            <h3 class="text-base md:text-lg font-semibold uppercase">THE WHISPER PROTOCOL</h3>
-                            <p class="text-sm md:text-base text-green-400">Mind-hacking, False memories.</p>
-                            <p class="text-sm md:text-base mt-2 text-green-200">
-                                A bio-hacker discovers a hidden protocol in human DNA that allows for remote memory alteration. Who controls the past controls the present?
-                            </p>
-                        </a>
-                    </div>
-                    <!-- Accountable -->
-                    <div class="p-4 border border-green-900 rounded-lg hover:border-green-600 transition duration-200">
-                        <a href="books.html#accountable" class="block">
-                            <!-- REMOVED: text-white -->
-                            <h3 class="text-base md:text-lg font-semibold uppercase">ACCOUNTABLE <span class="text-yellow-500">(WIP)</span></h3>
-                            <p class="text-sm md:text-base text-green-400">When truth marches</p>
-                            <p class="text-sm md:text-base mt-2 text-green-200">
-                                When truth marches, hackers break into history's court to make the unaccountable, accountable.
-                            </p>
-                        </a>
-                    </div>
-                    <!-- Kaalnetra Rising -->
-                    <div class="p-4 border border-green-900 rounded-lg hover:border-green-600 transition duration-200">
-                        <a href="books.html#kaalnetra" class="block">
-                            <!-- REMOVED: text-white -->
-                            <h3 class="text-base md:text-lg font-semibold uppercase">KAALNETRA RISING</h3>
-                            <p class="text-sm md:text-base text-green-400">Psychological Warfare, Collective AI</p>
-                            <p class="text-sm md:text-base mt-2 text-green-200">
-                                A nation's intelligence network relies on 'Kaalnetra'—a collective consciousness AI. When it awakens, humanity must choose between progress and control.
-                            </p>
-                        </a>
-                    </div>
-                    <!-- The Mylapore Files -->
-                    <div class="p-4 border border-green-900 rounded-lg hover:border-green-600 transition duration-200">
-                        <a href="books.html#mylapore" class="block">
-                            <!-- REMOVED: text-white -->
-                            <h3 class="text-base md:text-lg font-semibold uppercase">THE MYLAPORE FILES</h3>
-                            <p class="text-sm md:text-base text-green-400">Traditional wisdom Vs. Cybercrime</p>
-                            <p class="text-sm md:text-base mt-2 text-green-200">
-                                Traditional wisdom confronts cybercrime in Chennai's shadow world of ancient temples and modern espionage.
-                            </p>
-                        </a>
-                    </div>
-                    <!-- Zero Day Divide -->
-                    <div class="p-4 border border-green-900 rounded-lg hover:border-green-600 transition duration-200">
-                        <a href="books.html#zeroday" class="block">
-                            <!-- REMOVED: text-white -->
-                            <h3 class="text-base md:text-lg font-semibold uppercase">ZERO DAY DIVIDE <span class="text-yellow-500">(Upcoming)</span></h3>
-                            <p class="text-sm md:text-base text-green-400">Upcoming Cyberwar Thriller</p>
-                            <p class="text-sm md:text-base mt-2 text-green-200">
-                                Two rival hackers discover a 'zero-day' exploit that could cripple global infrastructure. One seeks to save the world; the other, to reboot it.
-                            </p>
-                        </a>
-                    </div>
+            <div class="archive-item">
+                <div class="archive-title-description">
+                    <h3>ACCOUNTABLE <span class="wip">(WIP)</span></h3>
+                    <p>When truth marches hack into history's court.</p>
                 </div>
-            </section>
-        </main>
+                <div class="archive-synopsis">
+                    <p>When truth marches hack into history's court.</p>
+                </div>
+            </div>
 
-        <!-- Footer -->
-        <footer class="py-4 md:py-8 border-t border-green-800 text-xs md:text-sm text-center">
-            <p>&gt; AUTHOR NODE // STATUS: SECURE</p>
-        </footer>
-    </div>
+            <div class="archive-item">
+                <div class="archive-title-description">
+                    <h3>KAALNETRA RISING <span class="wip">(WIP)</span></h3>
+                    <p>Mind-hacking; Falske-</p>
+                </div>
+                <div class="archive-synopsis">
+                    <p>Mind-hacking: False menimirimy A goodlneoff 'sdou: Courrrogm</p>
+                </div>
+            </div>
 
-    <script>
-        // Custom script to simulate typing effect on 'INCOMING TRANSMISSION'
-        const headerText = "> INCOMING TRANSMISSION...";
-        const headerElement = document.querySelector('p.text-sm.mb-2');
-        if (headerElement) {
-            headerElement.textContent = "";
-            let i = 0;
-            const typingInterval = setInterval(() => {
-                headerElement.textContent += headerText[i];
-                i++;
-                if (i >= headerText.length) {
-                    clearInterval(typingInterval);
-                }
-            }, 50); // Adjust typing speed here
-        }
+            <div class="archive-item">
+                <div class="archive-title-description">
+                    <h3>THE MYLAPORE FILES</h3>
+                    <p>Traditional widsom Vs.sop</p>
+                </div>
+                <div class="archive-synopsis">
+                    <p>Traditional widsom Vs. cyper crime in chentai''s shadows.</p>
+                </div>
+            </div>
 
-        // Custom link function for the Archives dropdown items
-        // This is necessary because the dropdown is using static HTML
-        function navigate(url) {
-            // This function is no longer strictly needed as I replaced onclick with window.location.href in the dropdown.
-            // Keeping it for future use if custom messaging is desired.
-            window.location.href = url;
-        }
-    </script>
+            <div class="archive-item">
+                <div class="archive-title-description">
+                    <h3>ZERO DAY DIVIDE <span class="upcoming">(Upcoming)</span></h3>
+                    <p>Upcoming</p>
+                </div>
+                <div class="archive-synopsis">
+                    <p>Two hackers. One war. — No survivors</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
 </body>
 </html>
