@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Archives | K. V. Raman</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'VT323', monospace;
+      background-color: #050505;
+      color: #00ff41;
+      user-select: none;
+    }
+    .cursor::after {
+      content: "█";
+      animation: blink 1s infinite;
+    }
+    @keyframes blink {
+      0%,50% { opacity: 1; }
+      51%,100% { opacity: 0; }
+    }
+  </style>
+</head>
+
+<body class="p-6">
+  <pre id="output" class="text-xl leading-relaxed"></pre>
+
+  <div class="flex">
+    <span>&gt; </span>
+    <input
+      id="command"
+      autofocus
+      class="bg-transparent outline-none border-none text-xl w-full"
+      autocomplete="off"
+    />
+  </div>
+
+  <script src="assets/js/archives.js"></script>
+</body>
+</html>
