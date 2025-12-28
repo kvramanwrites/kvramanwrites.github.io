@@ -1,11 +1,13 @@
-let clearance = "VISITOR";
-let loggedIn = false;
-
-
 const output = document.getElementById("output");
 const input = document.getElementById("command");
 
+if (!output || !input) {
+    throw new Error("Terminal DOM elements not found");
+}
+
 let cwd = "/archives";
+let clearance = "VISITOR";
+let loggedIn = false;
 
 const fs = {
     "/archives": {
@@ -22,45 +24,39 @@ const fs = {
     }
 };
 
-
 function print(text = "") {
-  output.textContent += text + "\n";
-  output.scrollTop = output.scrollHeight;
+    output.textContent += text + "\n";
+    output.scrollTop = output.scrollHeight;
 }
 
+/* ===== INIT ===== */
+
 print("> ARCHIVES NODE INITIALIZED");
+print("> CLEARANCE: VISITOR");
 print("> TYPE `ls` TO LIST FILES\n");
 
-input.addEventListener("keydown", (e) => {
-  if (e.key !== "Enter") return;
+/* ===== INPUT HANDLER ===== */
 
-  const cmd = input.value.trim();
-  print(`> ${cmd}`);
-  handleCommand(cmd);
-  input.value = "";
+input.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter") return;
+
+    const cmd = input.value.trim();
+    print(`> ${cmd}`);
+    handleCommand(cmd);
+    input.value = "";
 });
+
+/* ===== COMMAND HANDLER ===== */
 
 function handleCommand(cmd) {
 
-    if (cmd === "login") {
-        if (loggedIn) {
-            return print("SESSION ALREADY ACTIVE");
-        }
-
-        print("AUTHENTICATING...");
-        setTimeout(() => {
-            loggedIn = true;
-            clearance = "LEVEL_1";
-            print("IDENTITY VERIFIED");
-            print("CLEARANCE GRANTED: LEVEL_1\n");
-        }, 800);
-        return;
-    }
-
-
+    /* ---- ls ---- */
     if (cmd === "ls") {
         const dir = fs[cwd];
-        if (!dir) return print("ACCESS ERROR");
+        if (!dir) {
+            print("ACCESS ERROR");
+            return;
+        }
 
         Object.keys(dir).forEach(name => {
             const item = dir[name];
@@ -73,40 +69,65 @@ function handleCommand(cmd) {
         return;
     }
 
+    /* ---- cd ---- */
+    if (cmd.startsWith("cd ")) {
+        const target = cmd.split(" ")[1];
 
-  if (cmd.startsWith("cd ")) {
-    const target = cmd.split(" ")[1];
-    if (target === "..") {
-      cwd = "/archives";
-      return print("MOVED TO /archives");
+        if (target === "..") {
+            cwd = "/archives";
+            print("MOVED TO /archives");
+            return;
+        }
+
+        const next = `${cwd}/${target}`;
+        if (fs[next]) {
+            cwd = next;
+            print(`MOVED TO ${cwd}`);
+        } else {
+            print("NO SUCH DIRECTORY");
+        }
+        return;
     }
 
-    const next = `${cwd}/${target}`;
-    if (fs[next]) {
-      cwd = next;
-      return print(`MOVED TO ${cwd}`);
-    } else {
-      return print("NO SUCH DIRECTORY");
+    /* ---- login ---- */
+    if (cmd === "login") {
+        if (loggedIn) {
+            print("SESSION ALREADY ACTIVE");
+            return;
+        }
+
+        print("AUTHENTICATING...");
+        setTimeout(() => {
+            loggedIn = true;
+            clearance = "LEVEL_1";
+            print("IDENTITY VERIFIED");
+            print("CLEARANCE GRANTED: LEVEL_1\n");
+        }, 800);
+        return;
     }
-  }
 
-  if (cmd.startsWith("open ")) {
-      const file = cmd.split(" ")[1];
-      const item = fs[cwd]?.[file];
+    /* ---- open ---- */
+    if (cmd.startsWith("open ")) {
+        const file = cmd.split(" ")[1];
+        const item = fs[cwd]?.[file];
 
-      if (!item || item.type !== "file") {
-          return print("FILE NOT FOUND");
-      }
+        if (!item || item.type !== "file") {
+            print("FILE NOT FOUND");
+            return;
+        }
 
-      if (clearance === "VISITOR" && item.clearance !== "VISITOR") {
-          print("ACCESS DENIED");
-          print("CLEARANCE INSUFFICIENT\n");
-          return;
-      }
+        if (clearance === "VISITOR" && item.clearance !== "VISITOR") {
+            print("ACCESS DENIED");
+            print("CLEARANCE INSUFFICIENT\n");
+            return;
+        }
 
-      print(`\n[ OPENING FILE: ${file.toUpperCase()} ]`);
-      print("STATUS: DECLASSIFIED (PARTIAL)\n");
-      print(">> CONTENT STREAM AVAILABLE\n");
-      return;
-  }
+        print(`\n[ OPENING FILE: ${file.toUpperCase()} ]`);
+        print("STATUS: DECLASSIFIED (PARTIAL)");
+        print(">> CONTENT STREAM AVAILABLE\n");
+        return;
+    }
 
+    /* ---- fallback ---- */
+    print("UNKNOWN COMMAND");
+}
