@@ -1,3 +1,5 @@
+console.log("ARCHIVES JS VERSION: CLEAN BUILD v2");
+
 const output = document.getElementById("output");
 const input = document.getElementById("command");
 
