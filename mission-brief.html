@@ -1,57 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mission Brief | KV Raman</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KVR_DOSSIER // MISSION_BRIEF</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --terminal-green: #00ff41;
+            --terminal-bg: #050505;
+        }
+        body {
+            background-color: var(--terminal-bg);
+            color: var(--terminal-green);
+            font-family: 'VT323', monospace;
+            letter-spacing: 1px;
+            line-height: 1.4;
+        }
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 100;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+        .header-box {
+            border: 1px solid var(--terminal-green);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            background: rgba(0, 255, 65, 0.05);
+        }
+        .section-title {
+            background: var(--terminal-green);
+            color: black;
+            display: inline-block;
+            padding: 0 10px;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2em;
+            background-color: var(--terminal-green);
+            animation: blink 0.8s infinite steps(2);
+            vertical-align: middle;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+        a { color: white; text-decoration: underline; }
+        a:hover { background: var(--terminal-green); color: black; text-decoration: none; }
+    </style>
 </head>
-<body class="brief-body">
+<body class="p-6 md:p-12 max-w-4xl mx-auto">
 
-  <header class="brief-header">
-    <h1>🛰️ Mission Brief</h1>
-    <p><strong>Classification:</strong> Declassified for Civilian Access</p>
-    <p><strong>Codename:</strong> Author Node KV Raman</p>
-    <p><strong>Status:</strong> Active</p>
-  </header>
+    <div class="mb-8">
+        <a href="index.html" class="text-sm">[ BACK_TO_ROOT ]</a>
+    </div>
 
-  <section class="brief-section">
-    <h2>Profile Summary</h2>
-    <p>
-      KV Raman is a narrative operative specializing in the intersection of espionage, science, and strategy. His works blur the line between classified truth and speculative fiction, drawing inspiration from intelligence agencies, battlefield ethics, and futuristic conspiracies.
-    </p>
-    <p>
-      Formerly deployed in the civilian sector as a financial analyst, Raman now applies the same precision and discipline to constructing layered thrillers. His stories dissect hidden systems—whether they are genetic conspiracies, covert agencies, or the scars carried home by soldiers.
-    </p>
-  </section>
+    <header class="header-box">
+        <h1 class="text-4xl mb-2">🛰️ MISSION_BRIEF: KV_RAMAN</h1>
+        <div class="grid grid-cols-2 text-sm opacity-80">
+            <p>CLASSIFICATION: DECLASSIFIED_CIVILIAN</p>
+            <p>CODENAME: AUTHOR_NODE</p>
+            <p>STATUS: ACTIVE_OPERATIVE</p>
+            <p>FILE_ID: KVR-2025-ALPHA</p>
+        </div>
+    </header>
 
-  <section class="brief-section">
-    <h2>Areas of Operation</h2>
-    <ul>
-      <li><strong>Spycraft & Covert Ops:</strong> Stories embedded in intelligence agencies, shadow wars, and betrayal.</li>
-      <li><strong>Science & Speculation:</strong> Genome experiments, AI manipulation, cyberwarfare, and the unknown variables of tomorrow.</li>
-      <li><strong>Military Realism:</strong> Tales grounded in the grit, honor, and human cost of armed conflict.</li>
-    </ul>
-  </section>
+    <main class="space-y-12">
 
-  <section class="brief-section">
-    <h2>Primary Works (Filed under Archives)</h2>
-    <ul>
-      <li><em>The Whisper Protocol</em> — A techno-thriller unmasking genome conspiracies.</li>
-      <li><em>KaalNetra Rising</em> — A mind-hacking war for control of identity.</li>
-    </ul>
-  </section>
+        <section>
+            <span class="section-title">01_Profile_Summary</span>
+            <p class="text-xl mb-4">
+                KV Raman is a narrative operative specializing in the intersection of espionage, science, and strategy. His works blur the line between classified truth and speculative fiction.
+            </p>
+            <p class="opacity-80">
+                Formerly deployed in the civilian sector as a financial analyst, Raman now applies the same precision and discipline to constructing layered thrillers. His stories dissect hidden systems—whether they are genetic conspiracies, covert agencies, or the scars carried home by soldiers.
+            </p>
+        </section>
 
-  <section class="brief-section">
-    <h2>Mission Objective</h2>
-    <p>
-      To craft stories that resonate like encrypted transmissions — part revelation, part warning, and part battle cry. Each narrative invites readers to step into the shadows, decode the unknown, and confront the blurred lines between reality and fiction.
-    </p>
-  </section>
+        <section>
+            <span class="section-title">02_Areas_of_Operation</span>
+            <ul class="space-y-4">
+                <li><strong class="text-white">SPYCRAFT & COVERT OPS:</strong> Stories embedded in intelligence agencies, shadow wars, and betrayal.</li>
+                <li><strong class="text-white">SCIENCE & SPECULATION:</strong> Genome experiments, AI manipulation, cyberwarfare, and the unknown variables of tomorrow.</li>
+                <li><strong class="text-white">MILITARY REALISM:</strong> Tales grounded in the grit, honor, and human cost of armed conflict.</li>
+            </ul>
+        </section>
 
-  <footer class="brief-footer">
-    <p>📡 End of Mission Brief | KV Raman © 2025</p>
-  </footer>
+        <section>
+            <span class="section-title">03_Primary_Archives</span>
+            <div class="border-l-2 border-green-900 pl-6 space-y-4">
+                <p><strong>- THE WHISPER PROTOCOL:</strong> A techno-thriller unmasking genome conspiracies.</p>
+                <p><strong>- KAALNETRA RISING:</strong> A mind-hacking war for control of identity.</p>
+            </div>
+        </section>
+
+        <section class="border border-green-900 p-6">
+            <span class="section-title">04_Mission_Objective</span>
+            <p class="text-2xl italic leading-tight">
+                "To craft stories that resonate like encrypted transmissions — part revelation, part warning, and part battle cry. Each narrative invites readers to step into the shadows, decode the unknown, and confront the blurred lines between reality and fiction."
+            </p>
+        </section>
+
+        <section class="text-sm opacity-50 pt-10">
+            <p>>>> LOG_ENTRY: DATA_FETCH_COMPLETE</p>
+            <p>>>> TERMINATING_SESSION... <span class="cursor"></span></p>
+        </section>
+
+    </main>
+
+    <footer class="mt-20 text-center opacity-30 text-xs">
+        📡 END_OF_MISSION_BRIEF // KV_RAMAN © 2025
+    </footer>
 
 </body>
 </html>
