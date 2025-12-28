@@ -1,15 +1,14 @@
-console.log("ARCHIVES JS VERSION: CLEAN BUILD v2");
+console.log("ARCHIVES JS VERSION: STABLE BASE");
 
 const output = document.getElementById("output");
 const input = document.getElementById("command");
 
 if (!output || !input) {
-    throw new Error("Terminal DOM elements not found");
+    throw new Error("Missing terminal elements");
 }
 
 let cwd = "/archives";
 let clearance = "VISITOR";
-let loggedIn = false;
 
 const fs = {
     "/archives": {
@@ -26,33 +25,29 @@ const fs = {
     }
 };
 
-function print(text = "") {
-    output.textContent += text + "\n";
+function print(line = "") {
+    output.textContent += line + "\n";
     output.scrollTop = output.scrollHeight;
 }
 
-/* ===== INIT ===== */
-
+/* INIT */
 print("> ARCHIVES NODE INITIALIZED");
 print("> CLEARANCE: VISITOR");
-print("> TYPE `ls` TO LIST FILES\n");
+print("> TYPE ls | cd | open | login\n");
 
-/* ===== INPUT HANDLER ===== */
-
-input.addEventListener("keydown", (e) => {
+/* INPUT */
+input.addEventListener("keydown", function (e) {
     if (e.key !== "Enter") return;
 
     const cmd = input.value.trim();
-    print(`> ${cmd}`);
-    handleCommand(cmd);
+    print("> " + cmd);
+    run(cmd);
     input.value = "";
 });
 
-/* ===== COMMAND HANDLER ===== */
+/* COMMAND ROUTER */
+function run(cmd) {
 
-function handleCommand(cmd) {
-
-    /* ---- ls ---- */
     if (cmd === "ls") {
         const dir = fs[cwd];
         if (!dir) {
@@ -60,18 +55,17 @@ function handleCommand(cmd) {
             return;
         }
 
-        Object.keys(dir).forEach(name => {
+        Object.keys(dir).forEach(function (name) {
             const item = dir[name];
             if (item.type === "dir") {
-                print(`[DIR ] ${name}`);
+                print("[DIR ] " + name);
             } else {
-                print(`[ FILE: ${name.toUpperCase()} ]`);
+                print("[ FILE: " + name.toUpperCase() + " ]");
             }
         });
         return;
     }
 
-    /* ---- cd ---- */
     if (cmd.startsWith("cd ")) {
         const target = cmd.split(" ")[1];
 
@@ -81,55 +75,52 @@ function handleCommand(cmd) {
             return;
         }
 
-        const next = `${cwd}/${target}`;
+        const next = cwd + "/" + target;
         if (fs[next]) {
             cwd = next;
-            print(`MOVED TO ${cwd}`);
+            print("MOVED TO " + cwd);
         } else {
             print("NO SUCH DIRECTORY");
         }
         return;
     }
 
-    /* ---- login ---- */
     if (cmd === "login") {
-        if (loggedIn) {
+        if (clearance !== "VISITOR") {
             print("SESSION ALREADY ACTIVE");
             return;
         }
 
         print("AUTHENTICATING...");
-        setTimeout(() => {
-            loggedIn = true;
+        setTimeout(function () {
             clearance = "LEVEL_1";
             print("IDENTITY VERIFIED");
             print("CLEARANCE GRANTED: LEVEL_1\n");
-        }, 800);
+        }, 700);
         return;
     }
 
-    /* ---- open ---- */
     if (cmd.startsWith("open ")) {
         const file = cmd.split(" ")[1];
-        const item = fs[cwd]?.[file];
+        const item = fs[cwd] && fs[cwd][file];
 
         if (!item || item.type !== "file") {
             print("FILE NOT FOUND");
             return;
         }
 
-        if (clearance === "VISITOR" && item.clearance !== "VISITOR") {
+        if (item.clearance === "LEVEL_1" && clearance === "VISITOR") {
             print("ACCESS DENIED");
             print("CLEARANCE INSUFFICIENT\n");
             return;
         }
 
-        print(`\n[ OPENING FILE: ${file.toUpperCase()} ]`);
+        print("");
+        print("[ OPENING FILE: " + file.toUpperCase() + " ]");
         print("STATUS: DECLASSIFIED (PARTIAL)");
         print(">> CONTENT STREAM AVAILABLE\n");
         return;
     }
 
-    /* ---- fallback ---- */
     print("UNKNOWN COMMAND");
 }
