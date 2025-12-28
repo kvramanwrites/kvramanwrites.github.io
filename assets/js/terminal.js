@@ -15,10 +15,12 @@ const actions = document.getElementById("actions");
 
 let lineIndex = 0;
 let charIndex = 0;
+let typingComplete = false;
+let enterHandled = false;
 
 function typeLine() {
     if (lineIndex >= lines.length) {
-        actions.classList.remove("hidden");
+        typingComplete = true;
         terminal.classList.add("cursor");
         return;
     }
@@ -36,3 +38,29 @@ function typeLine() {
 }
 
 typeLine();
+
+/* ===== ENTER KEY HANDLER ===== */
+
+document.addEventListener("keydown", (e) => {
+    if (!typingComplete || enterHandled) return;
+
+    if (e.key === "Enter") {
+        enterHandled = true;
+        terminal.classList.remove("cursor");
+
+        terminal.textContent += "\n> ENTER RECEIVED";
+        terminal.textContent += "\n> ACCESS GRANTED\n";
+
+        setTimeout(() => {
+            window.location.href = "archives.html";
+        }, 800);
+    }
+});
+
+/* ===== CLICK FALLBACK ===== */
+
+actions?.addEventListener("click", () => {
+    if (typingComplete && !enterHandled) {
+        window.location.href = "archives.html";
+    }
+});
