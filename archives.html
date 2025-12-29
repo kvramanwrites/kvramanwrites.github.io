@@ -23,10 +23,56 @@
       0%,50% { opacity: 1; }
       51%,100% { opacity: 0; }
     }
-  </style>
+
+ /* ===== CRT EFFECT ===== */
+
+.crt {
+  position: relative;
+}
+
+.crt::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.03),
+      rgba(255, 255, 255, 0.03) 1px,
+      rgba(0, 0, 0, 0.05) 2px,
+      rgba(0, 0, 0, 0.05) 3px
+    );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.crt::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 255, 65, 0.08) 0%,
+    rgba(0, 0, 0, 0.85) 70%
+  );
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* Text glow */
+.crt,
+.crt * {
+  text-shadow:
+    0 0 4px rgba(0, 255, 65, 0.4),
+    0 0 10px rgba(0, 255, 65, 0.2);
+}
+
+
+
+ </style>
 </head>
 
-<body class="p-6">
+<body class="p-6 crt">
   <pre id="output" class="text-xl leading-relaxed"></pre>
 
   <div class="flex">
