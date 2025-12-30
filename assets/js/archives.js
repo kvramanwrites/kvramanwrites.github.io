@@ -33,7 +33,8 @@ function print(line = "") {
 /* INIT */
 print("> ARCHIVES NODE INITIALIZED");
 print("> CLEARANCE: VISITOR");
-print("> TYPE ls | cd | open | login\n");
+print("> TYPE login | exit\n");
+
 
 /* INPUT */
 input.addEventListener("keydown", function (e) {
@@ -45,8 +46,52 @@ input.addEventListener("keydown", function (e) {
     input.value = "";
 });
 
+document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && document.activeElement === input) {
+        print("\nSIGNAL LOST");
+        print("RETURNING TO ENTRY NODE...\n");
+
+        setTimeout(function () {
+            window.location.href = "index.html";
+        }, 700);
+    }
+});
+
+
 /* COMMAND ROUTER */
 function run(cmd) {
+
+    if (cmd === "help") {
+        if (clearance === "VISITOR") {
+            print("ACCESS DENIED");
+            print("AUTHENTICATION REQUIRED\n");
+            return;
+        }
+
+        print("AVAILABLE COMMANDS:");
+        print("  login        → authenticate session");
+        print("  ls           → list directory contents");
+        print("  cd <dir>     → change directory");
+        print("  open <file>  → access file");
+        print("  exit         → terminate session");
+        print("  ESC          → emergency abort\n");
+        return;
+    }
+
+
+
+
+
+    if (cmd === "exit" || cmd === "logout") {
+        print("SESSION TERMINATED");
+        print("RETURNING TO ENTRY NODE...\n");
+
+        setTimeout(function () {
+            window.location.href = "index.html";
+        }, 800);
+
+        return;
+    }
 
     if (cmd === "ls") {
         const dir = fs[cwd];
@@ -96,6 +141,7 @@ function run(cmd) {
             clearance = "LEVEL_1";
             print("IDENTITY VERIFIED");
             print("CLEARANCE GRANTED: LEVEL_1\n");
+            print("> TYPE help | ls | cd | open | exit\n");
         }, 700);
         return;
     }
