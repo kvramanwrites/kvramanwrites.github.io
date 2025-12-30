@@ -37,6 +37,23 @@ print("> TYPE login | exit\n");
 
 
 /* INPUT */
+
+document.addEventListener("keydown", function (e) {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "c" && input.value.length > 0) {
+
+        e.preventDefault();
+
+        print("^C");
+        print("INTERRUPT RECEIVED");
+        print("PROCESS HALTED\n");
+        input.value = "";
+
+    }
+});
+
+
+
+
 input.addEventListener("keydown", function (e) {
     if (e.key !== "Enter") return;
 
