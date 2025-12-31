@@ -10,6 +10,7 @@ if (!output || !input) {
 let cwd = "/archives";
 let clearance = "VISITOR";
 
+
 const fs = {
     "/archives": {
         "whisper_protocol": { type: "file", clearance: "LEVEL_1" },
@@ -24,6 +25,16 @@ const fs = {
         "build_log_01": { type: "file", clearance: "VISITOR" }
     }
 };
+
+const hum = document.getElementById("terminalHum");
+let humEnabled = localStorage.getItem("hum") === "on";
+
+if (humEnabled) {
+    hum.volume = 0.15;
+    hum.play().catch(() => {});
+}
+
+
 
 function print(line = "") {
     output.textContent += line + "\n";
@@ -90,11 +101,29 @@ function run(cmd) {
         print("  ls           → list directory contents");
         print("  cd <dir>     → change directory");
         print("  open <file>  → access file");
+        print("  hum          → toggle ambient system audio");
         print("  exit         → terminate session");
         print("  ESC          → emergency abort\n");
+
         return;
     }
 
+
+    if (cmd === "hum") {
+        if (!humEnabled) {
+            humEnabled = true;
+            localStorage.setItem("hum", "on");
+            hum.volume = 0.15;
+            hum.play().catch(() => {});
+            print("AMBIENT HUM: ENABLED\n");
+        } else {
+            humEnabled = false;
+            localStorage.setItem("hum", "off");
+            hum.pause();
+            print("AMBIENT HUM: DISABLED\n");
+        }
+        return;
+    }
 
 
 
@@ -158,7 +187,7 @@ function run(cmd) {
             clearance = "LEVEL_1";
             print("IDENTITY VERIFIED");
             print("CLEARANCE GRANTED: LEVEL_1\n");
-            print("> TYPE help | ls | cd | open | exit\n");
+            print("> TYPE help | ls | cd | open | hum | exit\n");
         }, 700);
         return;
     }
