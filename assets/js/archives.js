@@ -1,5 +1,9 @@
 console.log("ARCHIVES JS VERSION: STABLE BASE");
 
+/* ===============================
+ *   DOM REFERENCES
+ * ================================ */
+
 const output = document.getElementById("output");
 const input = document.getElementById("command");
 
@@ -7,9 +11,16 @@ if (!output || !input) {
     throw new Error("Missing terminal elements");
 }
 
+/* ===============================
+ *   SYSTEM STATE
+ * ================================ */
+
 let cwd = "/archives";
 let clearance = "VISITOR";
 
+/* ===============================
+ *   FAKE FILE SYSTEM
+ * ================================ */
 
 const fs = {
     "/archives": {
@@ -26,44 +37,66 @@ const fs = {
     }
 };
 
-const hum = document.getElementById("terminalHum");
+/* ===============================
+ *   AMBIENT HUM SETUP
+ * ================================ */
+
+let hum = null;
 let humEnabled = localStorage.getItem("hum") === "on";
 
-if (humEnabled) {
+document.addEventListener("DOMContentLoaded", function () {
+    hum = document.getElementById("terminalHum");
+
+    if (!hum) {
+        console.warn("Terminal hum audio not found");
+        return;
+    }
+
     hum.volume = 0.15;
-    hum.play().catch(() => {});
-}
 
+    if (humEnabled) {
+        hum.play().catch(() => {});
+    }
+});
 
+/* ===============================
+ *   OUTPUT HELPER
+ * ================================ */
 
 function print(line = "") {
     output.textContent += line + "\n";
     output.scrollTop = output.scrollHeight;
 }
 
-/* INIT */
+/* ===============================
+ *   INIT
+ * ================================ */
+
 print("> ARCHIVES NODE INITIALIZED");
 print("> CLEARANCE: VISITOR");
 print("> TYPE login | exit\n");
 
-
-/* INPUT */
+/* ===============================
+ *   KEYBOARD: CTRL+C (INTERRUPT)
+ * ================================ */
 
 document.addEventListener("keydown", function (e) {
-    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "c" && input.value.length > 0) {
-
+    if (
+        (e.ctrlKey || e.metaKey) &&
+        e.key.toLowerCase() === "c" &&
+        input.value.length > 0
+    ) {
         e.preventDefault();
-
         print("^C");
         print("INTERRUPT RECEIVED");
         print("PROCESS HALTED\n");
         input.value = "";
-
     }
 });
 
-
-
+/* ===============================
+ *   INPUT HANDLER
+ * ================================ */
 
 input.addEventListener("keydown", function (e) {
     if (e.key !== "Enter") return;
@@ -73,6 +106,10 @@ input.addEventListener("keydown", function (e) {
     run(cmd);
     input.value = "";
 });
+
+/* ===============================
+ *   KEYBOARD: ESC (ABORT SESSION)
+ * ================================ */
 
 document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && document.activeElement === input) {
@@ -85,10 +122,13 @@ document.addEventListener("keydown", function (e) {
     }
 });
 
+/* ===============================
+ *   COMMAND ROUTER
+ * ================================ */
 
-/* COMMAND ROUTER */
 function run(cmd) {
 
+    /* ---- help ---- */
     if (cmd === "help") {
         if (clearance === "VISITOR") {
             print("ACCESS DENIED");
@@ -104,12 +144,16 @@ function run(cmd) {
         print("  hum          → toggle ambient system audio");
         print("  exit         → terminate session");
         print("  ESC          → emergency abort\n");
-
         return;
     }
 
-
+    /* ---- hum ---- */
     if (cmd === "hum") {
+        if (!hum) {
+            print("AUDIO SYSTEM NOT AVAILABLE\n");
+            return;
+        }
+
         if (!humEnabled) {
             humEnabled = true;
             localStorage.setItem("hum", "on");
@@ -125,9 +169,7 @@ function run(cmd) {
         return;
     }
 
-
-
-
+    /* ---- exit / logout ---- */
     if (cmd === "exit" || cmd === "logout") {
         print("SESSION TERMINATED");
         print("RETURNING TO ENTRY NODE...\n");
@@ -135,10 +177,10 @@ function run(cmd) {
         setTimeout(function () {
             window.location.href = "index.html";
         }, 800);
-
         return;
     }
 
+    /* ---- ls ---- */
     if (cmd === "ls") {
         const dir = fs[cwd];
         if (!dir) {
@@ -157,6 +199,7 @@ function run(cmd) {
         return;
     }
 
+    /* ---- cd ---- */
     if (cmd.startsWith("cd ")) {
         const target = cmd.split(" ")[1];
 
@@ -176,6 +219,7 @@ function run(cmd) {
         return;
     }
 
+    /* ---- login ---- */
     if (cmd === "login") {
         if (clearance !== "VISITOR") {
             print("SESSION ALREADY ACTIVE");
@@ -192,6 +236,7 @@ function run(cmd) {
         return;
     }
 
+    /* ---- open ---- */
     if (cmd.startsWith("open ")) {
         const file = cmd.split(" ")[1];
         const item = fs[cwd] && fs[cwd][file];
@@ -214,5 +259,6 @@ function run(cmd) {
         return;
     }
 
+    /* ---- fallback ---- */
     print("UNKNOWN COMMAND");
 }
