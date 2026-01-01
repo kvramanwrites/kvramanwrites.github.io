@@ -12,6 +12,15 @@ if (!output || !input) {
 }
 
 /* ===============================
+ *   MOBILE: TAP TO FOCUS INPUT
+ * ================================ */
+
+document.addEventListener("click", function () {
+    input.focus();
+});
+
+
+/* ===============================
  *   SYSTEM STATE
  * ================================ */
 
