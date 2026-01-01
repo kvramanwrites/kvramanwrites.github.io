@@ -7,13 +7,17 @@
   <!-- Viewport -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Tailwind CDN -->
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Monospace Font -->
+  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 
   <style>
+    /* ===============================
+       BASE SYSTEM STYLES
+    ================================ */
+
     body {
       font-family: 'VT323', monospace;
       background-color: #050505;
@@ -31,7 +35,10 @@
       51%, 100% { opacity: 0; }
     }
 
-    /* Mobile readability */
+    /* ===============================
+       MOBILE READABILITY
+    ================================ */
+
     @media (max-width: 768px) {
       body {
         font-size: 1.15rem;
@@ -43,7 +50,9 @@
       }
     }
 
-    /* ===== CRT EFFECT ===== */
+    /* ===============================
+       CRT EFFECT
+    ================================ */
 
     .crt {
       position: relative;
@@ -87,38 +96,74 @@
   </style>
 </head>
 
-<body class="h-screen crt">
+<body class="crt">
 
-  <!-- Main container -->
-  <main class="w-full max-w-3xl px-6 mx-auto flex flex-col justify-center min-h-screen md:min-h-0">
+  <!-- SYSTEM SHELL -->
+  <main
+    class="
+      w-full max-w-3xl mx-auto
+      min-h-screen
+      px-6
+      flex flex-col
+      justify-center
+      md:justify-center
+    "
+  >
 
-    <!-- Terminal output -->
-    <pre id="terminal" class="text-xl leading-relaxed"></pre>
+    <!-- OUTPUT SURFACE -->
+    <pre
+      id="terminal"
+      class="text-xl leading-relaxed"
+    ></pre>
 
-    <!-- Actions -->
-    <div id="actions" class="mt-8 hidden space-y-4">
-
-      <a href="archives.html"
-         class="block border border-green-500 px-4 py-3 text-lg
-                active:bg-green-500 active:text-black transition">
+    <!-- ACTION SURFACE -->
+    <div
+      id="actions"
+      class="
+        mt-8 hidden space-y-4
+      "
+    >
+      <a
+        href="archives.html"
+        class="
+          block border border-green-500
+          px-4 py-3 text-lg
+          active:bg-green-500 active:text-black
+          transition
+        "
+      >
         ENTER ARCHIVES
       </a>
 
-      <a href="author.html"
-         class="block border border-green-500 px-4 py-3 text-lg
-                active:bg-green-500 active:text-black transition">
+      <a
+        href="author.html"
+        class="
+          block border border-green-500
+          px-4 py-3 text-lg
+          active:bg-green-500 active:text-black
+          transition
+        "
+      >
         AUTHOR NODE
       </a>
 
-      <a href="mailto:signal@kvraman.in"
-         class="block border border-green-500 px-4 py-3 text-lg
-                active:bg-green-500 active:text-black transition">
+      <a
+        href="mailto:signal@kvraman.in"
+        class="
+          block border border-green-500
+          px-4 py-3 text-lg
+          active:bg-green-500 active:text-black
+          transition
+        "
+      >
         SEND SIGNAL
       </a>
-
     </div>
+
   </main>
 
+  <!-- LOGIC -->
   <script src="assets/js/terminal.js"></script>
+
 </body>
 </html>
