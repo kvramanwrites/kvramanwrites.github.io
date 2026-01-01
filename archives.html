@@ -3,9 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <title>Archives | K. V. Raman</title>
+
+  <!-- Viewport -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 
   <style>
@@ -14,83 +19,113 @@
       background-color: #050505;
       color: #00ff41;
       user-select: none;
+      overflow: hidden; /* important for mobile */
     }
+
     .cursor::after {
       content: "█";
       animation: blink 1s infinite;
     }
+
     @keyframes blink {
-      0%,50% { opacity: 1; }
-      51%,100% { opacity: 0; }
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
     }
 
- /* ===== CRT EFFECT ===== */
+    /* Mobile readability */
+    @media (max-width: 768px) {
+      body {
+        font-size: 1.15rem;
+      }
 
-.crt {
-  position: relative;
-}
+      pre {
+        font-size: 1.15rem;
+        line-height: 1.6;
+      }
 
-.crt::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.03),
-      rgba(255, 255, 255, 0.03) 1px,
-      rgba(0, 0, 0, 0.05) 2px,
-      rgba(0, 0, 0, 0.05) 3px
-    );
-  pointer-events: none;
-  z-index: 9999;
-}
+      input {
+        font-size: 1.15rem;
+      }
+    }
 
-.crt::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(0, 255, 65, 0.08) 0%,
-    rgba(0, 0, 0, 0.85) 70%
-  );
-  pointer-events: none;
-  z-index: 9998;
-}
+    /* ===== CRT EFFECT ===== */
 
-/* Text glow */
-.crt,
-.crt * {
-  text-shadow:
-    0 0 4px rgba(0, 255, 65, 0.4),
-    0 0 10px rgba(0, 255, 65, 0.2);
-}
+    .crt {
+      position: relative;
+    }
 
+    .crt::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.03),
+          rgba(255, 255, 255, 0.03) 1px,
+          rgba(0, 0, 0, 0.05) 2px,
+          rgba(0, 0, 0, 0.05) 3px
+        );
+      pointer-events: none;
+      z-index: 9999;
+    }
 
+    .crt::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(
+        ellipse at center,
+        rgba(0, 255, 65, 0.08) 0%,
+        rgba(0, 0, 0, 0.85) 70%
+      );
+      pointer-events: none;
+      z-index: 9998;
+    }
 
- </style>
+    .crt,
+    .crt * {
+      text-shadow:
+        0 0 4px rgba(0, 255, 65, 0.4),
+        0 0 10px rgba(0, 255, 65, 0.2);
+    }
+  </style>
 </head>
 
-<body class="p-6 crt">
-  <pre id="output" class="text-xl leading-relaxed"></pre>
+<body class="crt">
 
-  <div class="flex">
-    <span>&gt; </span>
-    <input
-      id="command"
-      autofocus
-      class="bg-transparent outline-none border-none text-xl w-full"
-      autocomplete="off"
-    />
-  </div>
+  <!-- FIELD TERMINAL CONTAINER -->
+  <main class="flex flex-col h-screen p-4">
 
+    <!-- OUTPUT (scrollable) -->
+    <pre
+      id="output"
+      class="flex-1 overflow-y-auto text-xl leading-relaxed mb-2">
+    </pre>
+
+    <!-- INPUT (fixed at bottom) -->
+    <div class="flex items-center">
+      <span class="mr-1">&gt;</span>
+      <input
+        id="command"
+        autofocus
+        class="bg-transparent outline-none border-none text-xl w-full"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+      />
+    </div>
+
+  </main>
+
+  <!-- Ambient Hum -->
+  <audio id="terminalHum" loop>
+    <source src="assets/audio/terminal-hum.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Logic -->
   <script src="assets/js/archives.js"></script>
 
-  <audio id="terminalHum" loop>
-  <source src="assets/audio/terminal-hum.mp3" type="audio/mpeg">
-</audio>
-
-
-  </body>
+</body>
 </html>

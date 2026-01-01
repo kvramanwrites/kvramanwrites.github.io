@@ -18,10 +18,20 @@ let charIndex = 0;
 let typingComplete = false;
 let enterHandled = false;
 
+/* ===============================
+ *   TYPEWRITER
+ * ================================ */
+
 function typeLine() {
     if (lineIndex >= lines.length) {
         typingComplete = true;
         terminal.classList.add("cursor");
+
+        // Mobile hint (non-intrusive)
+        if (isTouchDevice()) {
+            terminal.textContent += "\n> TAP SCREEN TO CONTINUE";
+        }
+
         return;
     }
 
@@ -39,28 +49,53 @@ function typeLine() {
 
 typeLine();
 
-/* ===== ENTER KEY HANDLER ===== */
+/* ===============================
+ *   DEVICE DETECTION
+ * ================================ */
+
+function isTouchDevice() {
+    return (
+        "ontouchstart" in window ||
+        navigator.maxTouchPoints > 0
+    );
+}
+
+/* ===============================
+ *   ENTER KEY (DESKTOP)
+ * ================================ */
 
 document.addEventListener("keydown", (e) => {
     if (!typingComplete || enterHandled) return;
 
     if (e.key === "Enter") {
-        enterHandled = true;
-        terminal.classList.remove("cursor");
-
-        terminal.textContent += "\n> ENTER RECEIVED";
-        terminal.textContent += "\n> ACCESS GRANTED\n";
-
-        setTimeout(() => {
-            window.location.href = "archives.html";
-        }, 800);
+        proceed();
     }
 });
 
-/* ===== CLICK FALLBACK ===== */
+/* ===============================
+ *   TAP / CLICK (MOBILE + FALLBACK)
+ * ================================ */
 
-actions?.addEventListener("click", () => {
-    if (typingComplete && !enterHandled) {
+document.addEventListener("click", () => {
+    if (!typingComplete || enterHandled) return;
+
+    if (isTouchDevice()) {
+        proceed();
+    }
+});
+
+/* ===============================
+ *   PROCEED HANDLER
+ * ================================ */
+
+function proceed() {
+    enterHandled = true;
+    terminal.classList.remove("cursor");
+
+    terminal.textContent += "\n> ENTER RECEIVED";
+    terminal.textContent += "\n> ACCESS GRANTED\n";
+
+    setTimeout(() => {
         window.location.href = "archives.html";
-    }
-});
+    }, 800);
+}
