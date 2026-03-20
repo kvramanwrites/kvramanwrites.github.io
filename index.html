@@ -5,20 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Vault | K V R World</title>
     <style>
+        /* --- CORE STYLES --- */
         body, html {
             margin: 0; padding: 0;
             height: 100%; width: 100%;
             background: #000;
             overflow: hidden;
-            font-family: 'Courier New', Courier, monospace; /* Secret file aesthetic */
+            font-family: 'Courier New', Courier, monospace;
         }
 
-        /* 1. THE K V R PORTAL (The Library visible through the hole) */
+        /* 1. THE K V R PORTAL (The Library Background) */
         .kvr-portal {
             position: fixed;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%) scale(1);
-            width: 38%; /* Fits the circular opening of your Vault_door.jpg */
+            width: 38%; /* Matches the circular opening of your vault image */
             height: 38%;
             background: url('assets/images/library_bg.jpg') center/cover no-repeat;
             z-index: 1;
@@ -27,14 +28,15 @@
             transition: transform 2s cubic-bezier(0.7, 0, 0.3, 1), filter 1s;
         }
 
-        /* 2. THE VAULT OVERLAY */
+        /* 2. THE VAULT OVERLAY (Foreground) */
         .vault-overlay {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100vh;
-            background: url('assets/images/Vault_door.png') center/cover no-repeat;
+            background: url('assets/images/Vault_door.jpg') center/cover no-repeat;
             z-index: 5;
             transition: opacity 1.5s ease-in;
+            pointer-events: none;
         }
 
         /* 3. INTERFACE LAYER */
@@ -48,71 +50,130 @@
             align-items: center;
             color: #d4af37;
             text-align: center;
+            transition: opacity 0.5s;
         }
 
         .status-text {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             letter-spacing: 5px;
             margin-bottom: 20px;
-            color: #888;
+            color: #666;
             text-transform: uppercase;
         }
 
         .kvr-button {
             padding: 20px 50px;
-            background: transparent;
+            background: rgba(0,0,0,0.5);
             border: 2px solid #d4af37;
             color: #d4af37;
-            font-size: 1.5rem;
-            letter-spacing: 10px;
+            font-size: 1.4rem;
+            letter-spacing: 8px;
             cursor: pointer;
             transition: 0.4s;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(5px);
         }
 
         .kvr-button:hover {
             background: #d4af37;
             color: #000;
-            box-shadow: 0 0 40px rgba(212, 175, 55, 0.6);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
         }
 
-        /* ANIMATION CLASSES */
-        .launching .kvr-portal {
-            transform: translate(-50%, -50%) scale(15); /* Zooms "into" the world */
-            filter: brightness(2);
+        /* 4. THE AUTHOR DOSSIER (About Section) */
+        .author-dossier {
+            position: fixed;
+            top: 110%; /* Hidden off-screen */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 85%;
+            max-width: 700px;
+            height: 70vh;
+            background: rgba(10, 10, 10, 0.98);
+            border: 1px solid #d4af37;
+            z-index: 100;
+            transition: top 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 40px;
+            color: #f0e68c;
+            overflow-y: auto;
+            box-shadow: 0 -20px 60px rgba(0,0,0,1);
         }
 
-        .launching .vault-overlay {
-            opacity: 0; /* Fades the metal away as we enter */
+        .author-dossier.active { top: 15vh; }
+
+        .dossier-header {
+            border-bottom: 1px solid #d4af37;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
         }
 
-        .launching .ui-layer {
-            opacity: 0;
-            transition: 0.5s;
+        .close-btn { cursor: pointer; color: #d4af37; font-weight: bold; }
+
+        .about-link {
+            position: absolute;
+            bottom: 40px;
+            color: #666;
+            cursor: pointer;
+            letter-spacing: 2px;
+            font-size: 0.7rem;
+            transition: 0.3s;
         }
+        .about-link:hover { color: #d4af37; }
+
+        /* --- ANIMATION STATES --- */
+        .launching .kvr-portal { transform: translate(-50%, -50%) scale(15); filter: brightness(2); }
+        .launching .vault-overlay { opacity: 0; }
+        .launching .ui-layer { opacity: 0; pointer-events: none; }
+
     </style>
 </head>
 <body>
 
     <div id="vault-system">
         <div class="kvr-portal"></div>
+
         <div class="vault-overlay"></div>
 
         <div class="ui-layer">
-            <div class="status-text">Identity Verified: Author Tier</div>
+            <div class="status-text">VAULT SECURED // IDENTITY: AUTHOR</div>
             <button class="kvr-button" onclick="enterKVR()">ENTER K V R WORLD</button>
+
+            <div class="about-link" onclick="toggleDossier()">[ ACCESS ARCHIVIST BIOGRAPHY ]</div>
+        </div>
+
+        <div class="author-dossier" id="dossier">
+            <div class="dossier-header">
+                <span>FILE_NAME: AUTHOR_BIO.DAT</span>
+                <span class="close-btn" onclick="toggleDossier()">[ CLOSE ]</span>
+            </div>
+            <h2>SUBJECT: ALEXANDER THORNE</h2>
+            <p><strong>DESIGNATION:</strong> Lead Architect of the K V R Trilogy.</p>
+            <p>Alexander Thorne explores the boundaries of mystery and technology. This vault serves as the primary gateway to the K V R World, a timeline chronicling the rise and fall of the Great Archivists.</p>
+            <p>For inquiries or encrypted transmissions, contact: <strong>contact@kvrworld.com</strong></p>
+            <hr style="border-color: #333; margin: 30px 0;">
+            <h3>TRILOGY STATUS:</h3>
+            <ul>
+                <li>Book 1: DEPLOYED</li>
+                <li>Book 2: INITIALIZING...</li>
+                <li>Book 3: ENCRYPTED</li>
+            </ul>
         </div>
     </div>
 
     <script>
         function enterKVR() {
-            // Trigger the animation
+            // Trigger the "Zoom-In" effect
             document.getElementById('vault-system').classList.add('launching');
 
-            // Redirect after the zoom effect completes
+            // Redirect to your trilogy site after 1.8 seconds
             setTimeout(() => {
-                window.location.href = "https://your-trilogy-link.com"; // Replace with actual KVR link
+                window.location.href = "https://your-trilogy-link.com";
             }, 1800);
+        }
+
+        function toggleDossier() {
+            document.getElementById('dossier').classList.toggle('active');
         }
     </script>
 
