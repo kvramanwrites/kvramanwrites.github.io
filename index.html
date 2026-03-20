@@ -1,169 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>K. V. Raman | Author Node</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Vault | K V R World</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0;
+            height: 100%; width: 100%;
+            background: #000;
+            overflow: hidden;
+            font-family: 'Courier New', Courier, monospace; /* Secret file aesthetic */
+        }
 
-  <!-- Viewport -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        /* 1. THE K V R PORTAL (The Library visible through the hole) */
+        .kvr-portal {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(1);
+            width: 38%; /* Fits the circular opening of your Vault_door.jpg */
+            height: 38%;
+            background: url('assets/images/library_bg.jpg') center/cover no-repeat;
+            z-index: 1;
+            border-radius: 50%;
+            box-shadow: inset 0 0 100px #000;
+            transition: transform 2s cubic-bezier(0.7, 0, 0.3, 1), filter 1s;
+        }
 
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
+        /* 2. THE VAULT OVERLAY */
+        .vault-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            background: url('assets/images/Vault_door.png') center/cover no-repeat;
+            z-index: 5;
+            transition: opacity 1.5s ease-in;
+        }
 
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+        /* 3. INTERFACE LAYER */
+        .ui-layer {
+            position: relative;
+            z-index: 10;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #d4af37;
+            text-align: center;
+        }
 
-  <style>
-    /* ===============================
-       BASE SYSTEM STYLES
-    ================================ */
+        .status-text {
+            font-size: 0.9rem;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+            color: #888;
+            text-transform: uppercase;
+        }
 
-    body {
-      font-family: 'VT323', monospace;
-      background-color: #050505;
-      color: #00ff41;
-      user-select: none;
-    }
+        .kvr-button {
+            padding: 20px 50px;
+            background: transparent;
+            border: 2px solid #d4af37;
+            color: #d4af37;
+            font-size: 1.5rem;
+            letter-spacing: 10px;
+            cursor: pointer;
+            transition: 0.4s;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
 
-    .cursor::after {
-      content: "█";
-      animation: blink 1s infinite;
-    }
+        .kvr-button:hover {
+            background: #d4af37;
+            color: #000;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.6);
+        }
 
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0; }
-    }
+        /* ANIMATION CLASSES */
+        .launching .kvr-portal {
+            transform: translate(-50%, -50%) scale(15); /* Zooms "into" the world */
+            filter: brightness(2);
+        }
 
-    /* ===============================
-       MOBILE READABILITY
-    ================================ */
+        .launching .vault-overlay {
+            opacity: 0; /* Fades the metal away as we enter */
+        }
 
-    @media (max-width: 768px) {
-      body {
-        font-size: 1.15rem;
-      }
-
-      pre {
-        font-size: 1.15rem;
-        line-height: 1.6;
-      }
-    }
-
-    /* ===============================
-       CRT EFFECT
-    ================================ */
-
-    .crt {
-      position: relative;
-    }
-
-    .crt::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background:
-        repeating-linear-gradient(
-          to bottom,
-          rgba(255, 255, 255, 0.03),
-          rgba(255, 255, 255, 0.03) 1px,
-          rgba(0, 0, 0, 0.05) 2px,
-          rgba(0, 0, 0, 0.05) 3px
-        );
-      pointer-events: none;
-      z-index: 9999;
-    }
-
-    .crt::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(
-        ellipse at center,
-        rgba(0, 255, 65, 0.08) 0%,
-        rgba(0, 0, 0, 0.85) 70%
-      );
-      pointer-events: none;
-      z-index: 9998;
-    }
-
-    .crt,
-    .crt * {
-      text-shadow:
-        0 0 4px rgba(0, 255, 65, 0.4),
-        0 0 10px rgba(0, 255, 65, 0.2);
-    }
-  </style>
+        .launching .ui-layer {
+            opacity: 0;
+            transition: 0.5s;
+        }
+    </style>
 </head>
+<body>
 
-<body class="crt">
+    <div id="vault-system">
+        <div class="kvr-portal"></div>
+        <div class="vault-overlay"></div>
 
-  <!-- SYSTEM SHELL -->
-  <main
-    class="
-      w-full max-w-3xl mx-auto
-      min-h-screen
-      px-6
-      flex flex-col
-      justify-center
-      md:justify-center
-    "
-  >
-
-    <!-- OUTPUT SURFACE -->
-    <pre
-      id="terminal"
-      class="text-xl leading-relaxed"
-    ></pre>
-
-    <!-- ACTION SURFACE -->
-    <div
-      id="actions"
-      class="
-        mt-8 hidden space-y-4
-      "
-    >
-      <a
-        href="archives.html"
-        class="
-          block border border-green-500
-          px-4 py-3 text-lg
-          active:bg-green-500 active:text-black
-          transition
-        "
-      >
-        ENTER ARCHIVES
-      </a>
-
-      <a
-        href="author.html"
-        class="
-          block border border-green-500
-          px-4 py-3 text-lg
-          active:bg-green-500 active:text-black
-          transition
-        "
-      >
-        AUTHOR NODE
-      </a>
-
-      <a
-        href="mailto:signal@kvraman.in"
-        class="
-          block border border-green-500
-          px-4 py-3 text-lg
-          active:bg-green-500 active:text-black
-          transition
-        "
-      >
-        SEND SIGNAL
-      </a>
+        <div class="ui-layer">
+            <div class="status-text">Identity Verified: Author Tier</div>
+            <button class="kvr-button" onclick="enterKVR()">ENTER K V R WORLD</button>
+        </div>
     </div>
 
-  </main>
+    <script>
+        function enterKVR() {
+            // Trigger the animation
+            document.getElementById('vault-system').classList.add('launching');
 
-  <!-- LOGIC -->
-  <script src="assets/js/terminal.js"></script>
+            // Redirect after the zoom effect completes
+            setTimeout(() => {
+                window.location.href = "https://your-trilogy-link.com"; // Replace with actual KVR link
+            }, 1800);
+        }
+    </script>
 
 </body>
 </html>
