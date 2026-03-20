@@ -162,20 +162,24 @@
     </div>
 
     <script>
-        function enterKVR() {
-            // Trigger the "Zoom-In" effect
-            document.getElementById('vault-system').classList.add('launching');
+    function enterKVR() {
+        // 1. Start the "Zoom-In" animation
+        document.getElementById('vault-system').classList.add('launching');
 
-            // Redirect to your trilogy site after 1.8 seconds
-            setTimeout(() => {
-                window.location.href = "https://your-trilogy-link.com";
-            }, 1800);
-        }
+        // 2. Play a sound if you have one (Optional)
+        // new Audio('assets/audio/door_open.mp3').play();
 
-        function toggleDossier() {
-            document.getElementById('dossier').classList.toggle('active');
-        }
-    </script>
+        // 3. Redirect to your local trilogy folder
+        // Because the folder is in the same repository, we use a relative path
+        setTimeout(() => {
+            window.location.href = "trilogy/index.html";
+        }, 1800); // Matches the 1.8s zoom animation
+    }
 
+    function toggleDossier() {
+        const dossier = document.getElementById('dossier');
+        dossier.classList.toggle('active');
+    }
+</script>
 </body>
 </html>
