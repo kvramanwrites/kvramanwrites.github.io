@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Archive | K V R World</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Courier+Prime&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --gold: #d4af37;
+            --gold-dim: rgba(212,175,55,0.35);
+            --gold-faint: rgba(212,175,55,0.08);
+            --wood-dark: #1a0f03;
+            --wood-mid: #2e1c06;
+            --wood-light: #3d2809;
+            --wood-edge: rgba(200,145,51,0.25);
+            --bg: #060400;
+        }
+
+        html, body {
+            height: 100%;
+            background: var(--bg);
+            overflow-x: hidden;
+            font-family: 'Courier Prime', 'Courier New', monospace;
+            color: var(--gold);
+        }
+
+        /* ── AMBIENT BACKGROUND ── */
+        .scene {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px 60px;
+            position: relative;
+        }
+
+        .scene::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 60% 40% at 50% 10%, rgba(212,175,55,0.06) 0%, transparent 70%),
+                radial-gradient(ellipse 80% 60% at 50% 100%, rgba(40,20,0,0.8) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ── CEILING LIGHT ── */
+        .ceiling-fixture {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+        .ceiling-rod { width: 2px; height: 48px; background: rgba(212,175,55,0.15); }
+        .ceiling-bulb { width: 8px; height: 8px; border-radius: 50%; background: rgba(212,175,55,0.5); box-shadow: 0 0 14px 4px rgba(212,175,55,0.2); }
+        .light-cone {
+            width: 380px;
+            height: 110px;
+            clip-path: polygon(37% 0%, 63% 0%, 100% 100%, 0% 100%);
+            background: linear-gradient(to bottom, rgba(212,175,55,0.05), transparent);
+            margin-top: -2px;
+        }
+
+        /* ── HEADER ── */
+        .archive-title {
+            position: relative;
+            z-index: 1;
+            font-family: 'Cinzel', serif;
+            font-size: clamp(11px, 1.5vw, 14px);
+            letter-spacing: 8px;
+            color: rgba(212,175,55,0.5);
+            text-transform: uppercase;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        /* ── SHELF WRAPPER ── */
+        .shelves {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 780px;
+            display: flex;
+            flex-direction: column;
+            gap: 36px;
+        }
+
+        /* ── SINGLE SHELF ── */
+        .shelf-unit { width: 100%; }
+
+        .shelf-heading {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(8px, 1.2vw, 10px);
+            letter-spacing: 5px;
+            color: rgba(212,175,55,0.35);
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .shelf-body { position: relative; }
+
+        .books {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: clamp(8px, 2vw, 16px);
+            padding: 0 clamp(20px, 5%, 50px);
+        }
+
+        /* ── WOOD PLANK ── */
+        .plank {
+            width: 100%;
+            height: 14px;
+            background: linear-gradient(180deg, var(--wood-light) 0%, var(--wood-mid) 50%, var(--wood-dark) 100%);
+            border-radius: 2px;
+            position: relative;
+        }
+        .plank::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: var(--wood-edge);
+            border-radius: 2px 2px 0 0;
+        }
+        .bracket {
+            position: absolute;
+            bottom: 14px;
+            width: 16px;
+            background: linear-gradient(90deg, var(--wood-light), var(--wood-mid));
+        }
+        .bracket.left { left: 14px; border-radius: 2px 0 0 0; }
+        .bracket.right { right: 14px; border-radius: 0 2px 0 0; }
+
+        /* ── BOOK ── */
+        .book {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            -webkit-tap-highlight-color: transparent;
+        }
+        .book:hover { transform: translateY(-20px); }
+        .book:hover .book-glow { opacity: 1; }
+
+        .book-glow {
+            position: absolute;
+            bottom: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 30px;
+            background: radial-gradient(ellipse, rgba(212,175,55,0.2), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .book-body {
+            border-radius: 2px 5px 5px 2px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.5);
+        }
+
+        .book-spine {
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 14px;
+            border-radius: 2px 0 0 2px;
+            z-index: 2;
+        }
+
+        .book-cover {
+            position: absolute;
+            left: 14px; top: 0; right: 0; bottom: 0;
+        }
+
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .book-label {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(7px, 1vw, 9px);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            line-height: 1.5;
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        /* Book 1 — warm gold */
+        .book-1 .book-body { width: clamp(90px, 13vw, 130px); height: clamp(140px, 20vw, 200px); }
+        .book-1 .book-spine { background: linear-gradient(180deg, #8b5e1a, #5c3d0e); }
+        .book-1 .book-body { border-color: rgba(212,175,55,0.2); }
+        .book-1 .book-label { color: rgba(212,175,55,0.8); }
+
+        /* Book 2 — deep teal */
+        .book-2 .book-body { width: clamp(90px, 13vw, 130px); height: clamp(140px, 20vw, 200px); }
+        .book-2 .book-spine { background: linear-gradient(180deg, #1a5c6b, #0d3040); }
+        .book-2 .book-body { border-color: rgba(80,160,180,0.2); }
+        .book-2 .book-label { color: rgba(100,180,200,0.8); }
+
+        /* Book 3 — sealed */
+        .book-3 .book-body { width: clamp(90px, 13vw, 130px); height: clamp(140px, 20vw, 200px); background: #0d0d0d; border-color: #222; }
+        .book-3 .book-spine { background: linear-gradient(180deg, #252525, #111); }
+        .book-3 .book-label { color: #383838; }
+        .book-3 { cursor: default; }
+        .book-3:hover { transform: none; }
+        .book-3:hover .book-glow { opacity: 0; }
+
+        .sealed-inner {
+            position: absolute;
+            left: 14px; top: 0; right: 0; bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #0d0d0d;
+        }
+
+        .lock {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .lock-shackle {
+            width: 14px; height: 10px;
+            border: 1.5px solid #2e2e2e;
+            border-bottom: none;
+            border-radius: 7px 7px 0 0;
+        }
+        .lock-body {
+            width: 22px; height: 16px;
+            border: 1.5px solid #2e2e2e;
+            border-radius: 2px;
+        }
+        .sealed-text {
+            color: #2a2a2a;
+            font-size: 7px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        /* ── EMPTY SLOTS ── */
+        .empty-slot {
+            border: 1px dashed rgba(212,175,55,0.1);
+            border-radius: 2px 5px 5px 2px;
+            background: rgba(6,4,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: default;
+        }
+        .empty-dots { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+        .empty-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(212,175,55,0.12); }
+        .empty-label { color: rgba(212,175,55,0.1); font-size: 7px; letter-spacing: 2px; margin-top: 7px; text-transform: uppercase; }
+
+        /* ── SHELF DIVIDER ── */
+        .shelf-divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            position: relative;
+            z-index: 1;
+        }
+        .shelf-divider-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.15), transparent); }
+        .shelf-divider-text { color: rgba(212,175,55,0.2); font-size: 8px; letter-spacing: 4px; text-transform: uppercase; white-space: nowrap; }
+
+        /* ── TAGLINE ── */
+        .tagline {
+            position: relative;
+            z-index: 1;
+            margin-top: 28px;
+            color: rgba(212,175,55,0.25);
+            font-size: clamp(8px, 1vw, 10px);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        /* ── TOAST ── */
+        .toast {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: rgba(10,8,0,0.95);
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            letter-spacing: 3px;
+            padding: 14px 28px;
+            opacity: 0;
+            transition: opacity 0.4s, transform 0.4s;
+            pointer-events: none;
+            z-index: 999;
+            white-space: nowrap;
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        /* ── PAGE TRANSITION ── */
+        .curtain {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 9999;
+            transition: opacity 0.8s ease;
+        }
+        .curtain.active { opacity: 1; pointer-events: all; }
+
+        /* ── MOBILE ── */
+        @media (max-width: 600px) {
+            .light-cone { width: 260px; }
+            .books { gap: 8px; padding: 0 16px; }
+            .shelf-heading { letter-spacing: 3px; }
+            .tagline { letter-spacing: 3px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="curtain" id="curtain"></div>
+<div class="toast" id="toast"></div>
+
+<div class="scene">
+
+    <div class="ceiling-fixture">
+        <div class="ceiling-rod"></div>
+        <div class="ceiling-bulb"></div>
+        <div class="light-cone"></div>
+    </div>
+
+    <div class="archive-title">The K V R Archive</div>
+
+    <div class="shelves">
+
+        <!-- SHELF 1 — TRILOGY -->
+        <div class="shelf-unit">
+            <div class="shelf-heading">The K V R Trilogy</div>
+            <div class="shelf-body">
+                <div class="books">
+
+                    <!-- Book 1 -->
+                    <div class="book book-1" onclick="enterTrilogy()" title="The Whisper Protocol">
+                        <div class="book-glow"></div>
+                        <div class="book-body">
+                            <div class="book-spine"></div>
+                            <div class="book-cover">
+                                <img src="assets/images/book1_front.png" alt="The Whisper Protocol cover" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(160deg,#2a1a06,#0d0802)'">
+                            </div>
+                        </div>
+                        <div class="book-label">The Whisper Protocol</div>
+                    </div>
+
+                    <!-- Book 2 -->
+                    <div class="book book-2" onclick="enterTrilogy()" title="KaalNetra Rising">
+                        <div class="book-glow"></div>
+                        <div class="book-body">
+                            <div class="book-spine"></div>
+                            <div class="book-cover">
+                                <img src="assets/images/book2_front.png" alt="KaalNetra Rising cover" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(160deg,#050f22,#020810)'">
+                            </div>
+                        </div>
+                        <div class="book-label">KaalNetra Rising</div>
+                    </div>
+
+                    <!-- Book 3 — Sealed -->
+                    <div class="book book-3" title="Revealing Soon">
+                        <div class="book-body">
+                            <div class="book-spine"></div>
+                            <div class="sealed-inner">
+                                <div class="lock">
+                                    <div class="lock-shackle"></div>
+                                    <div class="lock-body"></div>
+                                </div>
+                                <div class="sealed-text">Revealing<br>Soon</div>
+                            </div>
+                        </div>
+                        <div class="book-label">???</div>
+                    </div>
+
+                </div>
+                <div class="bracket left" style="height:62px"></div>
+                <div class="bracket right" style="height:62px"></div>
+                <div class="plank"></div>
+            </div>
+        </div>
+
+        <!-- DIVIDER -->
+        <div class="shelf-divider">
+            <div class="shelf-divider-line"></div>
+            <div class="shelf-divider-text">Beyond the trilogy</div>
+            <div class="shelf-divider-line"></div>
+        </div>
+
+        <!-- SHELF 2 — FUTURE -->
+        <div class="shelf-unit">
+            <div class="shelf-heading">What awaits beyond</div>
+            <div class="shelf-body">
+                <div class="books" style="align-items:flex-end; justify-content:center;">
+
+                    <div style="display:flex;flex-direction:column;align-items:center">
+                        <div class="empty-slot" style="width:clamp(76px,11vw,110px);height:clamp(124px,18vw,174px)">
+                            <div class="empty-dots"><div class="empty-dot"></div><div class="empty-dot"></div><div class="empty-dot"></div></div>
+                        </div>
+                        <div class="empty-label">—</div>
+                    </div>
+
+                    <div style="display:flex;flex-direction:column;align-items:center">
+                        <div class="empty-slot" style="width:clamp(70px,10vw,100px);height:clamp(110px,16vw,155px)">
+                            <div class="empty-dots"><div class="empty-dot"></div><div class="empty-dot"></div><div class="empty-dot"></div></div>
+                        </div>
+                        <div class="empty-label">—</div>
+                    </div>
+
+                    <div style="display:flex;flex-direction:column;align-items:center">
+                        <div class="empty-slot" style="width:clamp(64px,9vw,90px);height:clamp(96px,14vw,136px)">
+                            <div class="empty-dots"><div class="empty-dot"></div><div class="empty-dot"></div></div>
+                        </div>
+                        <div class="empty-label">—</div>
+                    </div>
+
+                    <div style="display:flex;flex-direction:column;align-items:center">
+                        <div class="empty-slot" style="width:clamp(58px,8vw,80px);height:clamp(82px,12vw,116px)">
+                            <div class="empty-dots"><div class="empty-dot"></div><div class="empty-dot"></div></div>
+                        </div>
+                        <div class="empty-label">—</div>
+                    </div>
+
+                </div>
+                <div class="bracket left" style="height:50px"></div>
+                <div class="bracket right" style="height:50px"></div>
+                <div class="plank"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="tagline">The archive is not yet complete</div>
+
+</div>
+
+<script>
+    function enterTrilogy() {
+        const curtain = document.getElementById('curtain');
+        curtain.classList.add('active');
+        setTimeout(() => {
+            window.location.href = 'Trilogy/index.html';
+        }, 800);
+    }
+
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    // Fade in on load
+    document.addEventListener('DOMContentLoaded', () => {
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 1s ease';
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => { document.body.style.opacity = '1'; });
+        });
+    });
+</script>
+
+</body>
+</html>
