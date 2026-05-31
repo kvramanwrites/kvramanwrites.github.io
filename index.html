@@ -14,12 +14,12 @@
             font-family: 'Courier New', Courier, monospace;
         }
 
-        /* 1. THE K V R PORTAL (The Library Background) */
+        /* 1. THE K V R PORTAL */
         .kvr-portal {
             position: fixed;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%) scale(1);
-            width: 38%; /* Matches the circular opening of your vault image */
+            width: 38%;
             height: 38%;
             background: url('assets/images/library_bg.jpg') center/cover no-repeat;
             z-index: 1;
@@ -28,7 +28,16 @@
             transition: transform 2s cubic-bezier(0.7, 0, 0.3, 1), filter 1s;
         }
 
-        /* 2. THE VAULT OVERLAY (Foreground) */
+        /* Mobile: larger portal so it fills the screen nicely */
+        @media (max-width: 768px) {
+            .kvr-portal {
+                width: 70vw;
+                height: 70vw;
+                top: 38%;
+            }
+        }
+
+        /* 2. THE VAULT OVERLAY */
         .vault-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -51,6 +60,8 @@
             color: #d4af37;
             text-align: center;
             transition: opacity 0.5s;
+            padding: 0 20px;
+            box-sizing: border-box;
         }
 
         .status-text {
@@ -61,16 +72,27 @@
             text-transform: uppercase;
         }
 
+        @media (max-width: 768px) {
+            .status-text {
+                font-size: 0.6rem;
+                letter-spacing: 3px;
+                margin-bottom: 14px;
+            }
+        }
+
         .kvr-button {
             padding: 20px 50px;
             background: rgba(0,0,0,0.5);
             border: 2px solid #d4af37;
             color: #d4af37;
+            font-family: 'Courier New', Courier, monospace;
             font-size: 1.4rem;
             letter-spacing: 8px;
             cursor: pointer;
             transition: 0.4s;
             backdrop-filter: blur(5px);
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
 
         .kvr-button:hover {
@@ -79,26 +101,77 @@
             box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
         }
 
-        /* 4. THE AUTHOR DOSSIER (About Section) */
+        @media (max-width: 768px) {
+            .kvr-button {
+                width: 100%;
+                max-width: 340px;
+                padding: 18px 20px;
+                font-size: 1rem;
+                letter-spacing: 5px;
+            }
+        }
+
+        /* 4. THE AUTHOR DOSSIER */
         .author-dossier {
             position: fixed;
-            top: 110%; /* Hidden off-screen */
             left: 50%;
             transform: translateX(-50%);
             width: 85%;
             max-width: 700px;
-            height: 70vh;
             background: rgba(10, 10, 10, 0.98);
             border: 1px solid #d4af37;
             z-index: 100;
-            transition: top 0.7s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 40px;
             color: #f0e68c;
             overflow-y: auto;
             box-shadow: 0 -20px 60px rgba(0,0,0,1);
+
+            /* Desktop: drops from top */
+            top: 110%;
+            height: 70vh;
+            transition: top 0.7s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .author-dossier.active { top: 15vh; }
+        .author-dossier.active {
+            top: 15vh;
+        }
+
+        /* Mobile: slides up from bottom */
+        @media (max-width: 768px) {
+            .author-dossier {
+                top: unset;
+                bottom: -100%;
+                height: 75vh;
+                width: 100%;
+                max-width: 100%;
+                left: 0;
+                transform: none;
+                padding: 28px 24px 40px;
+                box-sizing: border-box;
+                border-radius: 20px 20px 0 0;
+                border-bottom: none;
+                transition: bottom 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .author-dossier.active {
+                top: unset;
+                bottom: 0;
+            }
+        }
+
+        /* Drag handle for mobile dossier */
+        .dossier-handle {
+            display: none;
+            width: 40px;
+            height: 4px;
+            background: #444;
+            border-radius: 2px;
+            margin: 0 auto 20px;
+        }
+
+        @media (max-width: 768px) {
+            .dossier-handle { display: block; }
+        }
 
         .dossier-header {
             border-bottom: 1px solid #d4af37;
@@ -106,9 +179,22 @@
             margin-bottom: 25px;
             display: flex;
             justify-content: space-between;
+            align-items: center;
         }
 
-        .close-btn { cursor: pointer; color: #d4af37; font-weight: bold; }
+        @media (max-width: 768px) {
+            .dossier-header {
+                font-size: 0.7rem;
+            }
+        }
+
+        .close-btn {
+            cursor: pointer;
+            color: #d4af37;
+            font-weight: bold;
+            padding: 8px;
+            -webkit-tap-highlight-color: transparent;
+        }
 
         .about-link {
             position: absolute;
@@ -118,14 +204,38 @@
             letter-spacing: 2px;
             font-size: 0.7rem;
             transition: 0.3s;
+            -webkit-tap-highlight-color: transparent;
+            padding: 10px;
         }
+
         .about-link:hover { color: #d4af37; }
+
+        @media (max-width: 768px) {
+            .about-link {
+                position: static;
+                margin-top: 24px;
+                font-size: 0.65rem;
+                letter-spacing: 1.5px;
+            }
+        }
 
         /* --- ANIMATION STATES --- */
         .launching .kvr-portal { transform: translate(-50%, -50%) scale(15); filter: brightness(2); }
         .launching .vault-overlay { opacity: 0; }
         .launching .ui-layer { opacity: 0; pointer-events: none; }
 
+        /* Backdrop when dossier is open on mobile */
+        .dossier-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 99;
+        }
+
+        @media (max-width: 768px) {
+            .dossier-backdrop.active { display: block; }
+        }
     </style>
 </head>
 <body>
@@ -138,11 +248,14 @@
         <div class="ui-layer">
             <div class="status-text">VAULT SECURED // IDENTITY: AUTHOR</div>
             <button class="kvr-button" onclick="enterKVR()">ENTER K V R WORLD</button>
-
             <div class="about-link" onclick="toggleDossier()">[ ACCESS ARCHIVIST BIOGRAPHY ]</div>
         </div>
 
+        <!-- Backdrop (mobile only) -->
+        <div class="dossier-backdrop" id="backdrop" onclick="toggleDossier()"></div>
+
         <div class="author-dossier" id="dossier">
+            <div class="dossier-handle"></div>
             <div class="dossier-header">
                 <span>FILE_NAME: AUTHOR_BIO.DAT</span>
                 <span class="close-btn" onclick="toggleDossier()">[ CLOSE ]</span>
@@ -163,23 +276,33 @@
 
     <script>
     function enterKVR() {
-        // 1. Start the "Zoom-In" animation
         document.getElementById('vault-system').classList.add('launching');
-
-        // 2. Play a sound if you have one (Optional)
-        // new Audio('assets/audio/door_open.mp3').play();
-
-        // 3. Redirect to your local trilogy folder
-        // Because the folder is in the same repository, we use a relative path
         setTimeout(() => {
             window.location.href = "Trilogy/index.html";
-        }, 1800); // Matches the 1.8s zoom animation
+        }, 1800);
     }
 
     function toggleDossier() {
         const dossier = document.getElementById('dossier');
+        const backdrop = document.getElementById('backdrop');
         dossier.classList.toggle('active');
+        backdrop.classList.toggle('active');
     }
-</script>
+
+    // Allow swipe-down to close dossier on mobile
+    (function() {
+        const dossier = document.getElementById('dossier');
+        let startY = 0;
+
+        dossier.addEventListener('touchstart', e => {
+            startY = e.touches[0].clientY;
+        }, { passive: true });
+
+        dossier.addEventListener('touchend', e => {
+            const diff = e.changedTouches[0].clientY - startY;
+            if (diff > 80) toggleDossier(); // swipe down 80px to close
+        }, { passive: true });
+    })();
+    </script>
 </body>
 </html>
